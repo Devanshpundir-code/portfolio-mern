@@ -81,6 +81,7 @@ const generateDocxResume = async (filePath) => {
           }),
           new Paragraph({
             children: [
+              new TextRun('• Techfest, IIT Bombay: Certificate of Excellence, 6th position nationwide in Meshmerize competition (Dec 2025)\n'),
               new TextRun('• Techfest, IIT Bombay: Certificate of Excellence, 5th position in Meshmerize competition (Delhi Zone, Oct 2025)\n'),
               new TextRun('• TechnoXian World Cup 2025: Certificate of Appreciation, Open For All Fastest Line Follower Challenge, Noida Stadium (Aug-Sep 2025)\n'),
               new TextRun('• Coursera: Python for Data Analysis: Pandas & NumPy (Mar 2025, Verify: https://coursera.org/verify/DWZOGEY7OU5Y)\n'),
@@ -162,6 +163,7 @@ const generatePdfResume = (filePath) => {
     // Certifications
     sectionTitle('CERTIFICATIONS & ACHIEVEMENTS:');
     doc.fontSize(9.5).font('Helvetica')
+      .text('• Techfest, IIT Bombay: Certificate of Excellence, 6th position nationwide in Meshmerize competition (Dec 2025)')
       .text('• Techfest, IIT Bombay: Certificate of Excellence, 5th position in Meshmerize competition (Delhi Zone, Oct 2025)')
       .text('• TechnoXian World Cup 2025: Certificate of Appreciation, Open For All Fastest Line Follower Challenge, Noida Stadium')
       .text('• Coursera: Python for Data Analysis: Pandas & NumPy (Mar 2025, Verify: https://coursera.org/verify/DWZOGEY7OU5Y)')

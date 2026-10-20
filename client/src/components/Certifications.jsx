@@ -20,25 +20,43 @@ export default function Certifications() {
       pdf: null,
       verifyUrl: 'https://technoxian.com',
       highlight: true,
-      tag: 'World Championship',
+      tag: 'World Cup 2025',
     },
     {
-      id: 'techfest',
-      title: 'Certificate of Excellence — Meshmerize',
-      event: 'Delhi Zone, Techfest, IIT Bombay',
+      id: 'techfest-finals',
+      title: 'Certificate of Excellence — Techfest IIT Bombay (Finals)',
+      event: 'Meshmerize Grand Finale, Techfest, IIT Bombay',
+      issuer: 'Techfest, Indian Institute of Technology Bombay',
+      recipient: 'Devansh Pundir',
+      date: '22nd – 24th December, 2025',
+      achievement:
+        'Secured 6th position nationwide in the grand finale of the Meshmerize autonomous line-follower and maze robotics competition conducted by Techfest, IIT Bombay.',
+      badge: '6th Position — IIT Bombay Grand Finale',
+      type: 'IIT Bombay National Finals',
+      icon: '🏆',
+      image: '/certificates/techfest-iit-bombay-finals-meshmerize.png',
+      pdf: null,
+      verifyUrl: 'https://techfest.org',
+      highlight: true,
+      tag: 'National Top 6',
+    },
+    {
+      id: 'techfest-delhi',
+      title: 'Certificate of Excellence — Techfest Delhi Zone',
+      event: 'Delhi Zone Zonal Qualifier, Techfest, IIT Bombay',
       issuer: 'Techfest, IIT Bombay (Technovation)',
       recipient: 'Devansh Pundir',
       date: '12th October 2025',
       achievement:
-        'Secured 5th position in the prestigious Meshmerize autonomous line-following / maze navigation competition at Delhi Zone of Techfest, IIT Bombay.',
+        'Secured 5th position in the Meshmerize zonal qualifier competition of Delhi Zone of Techfest, IIT Bombay, qualifying for the national finals.',
       badge: '5th Position — Delhi Zone Finalist',
-      type: 'IIT Bombay Techfest',
-      icon: '🏆',
+      type: 'IIT Bombay Zonal Qualifiers',
+      icon: '🎖️',
       image: '/certificates/techfest-delhi-zone-meshmerize.png',
       pdf: null,
       verifyUrl: 'https://techfest.org',
       highlight: false,
-      tag: '5th Position Winner',
+      tag: '5th Position Qualifier',
     },
     {
       id: 'coursera-c',
@@ -49,7 +67,7 @@ export default function Certifications() {
       recipient: 'Devansh Pundir',
       date: 'May 23, 2025',
       achievement:
-        'Rigorous course covering C systems programming, dynamic memory management, pointer arithmetic, data structures, and compilation.',
+        'Rigorous course covering C systems programming, dynamic memory management, pointer arithmetic, system architecture, and compilation.',
       badge: 'Credential ID: 1S167XI2WQB7',
       type: 'Systems Programming',
       icon: '📜',
@@ -68,7 +86,7 @@ export default function Certifications() {
       recipient: 'Devansh Pundir',
       date: 'Mar 15, 2025',
       achievement:
-        'Hands-on data science coursework performing matrix operations with NumPy, tabular data manipulation with Pandas, and exploratory data analysis.',
+        'Hands-on data science coursework performing multidimensional matrix operations with NumPy and tabular structured analytics with Pandas.',
       badge: 'Credential ID: DWZOGEY7OU5Y',
       type: 'Data Science & Analytics',
       icon: '📊',
@@ -97,11 +115,11 @@ export default function Certifications() {
               maxWidth: '680px',
             }}
           >
-            Verified credentials, competitive robotics trophies, and university certifications. Click any certificate to preview the authentic official document.
+            Verified credentials, competitive robotics trophies, and university certifications. Click any certificate card to preview the authentic official document.
           </p>
         </div>
 
-        {/* 4 Cards Grid */}
+        {/* Responsive Cards Grid */}
         <div
           style={{
             display: 'grid',
@@ -361,7 +379,7 @@ export default function Certifications() {
               onClick={(e) => e.stopPropagation()}
               className="sketch-box"
               style={{
-                maxWidth: '900px',
+                maxWidth: '920px',
                 width: '100%',
                 maxHeight: '92vh',
                 display: 'flex',
@@ -485,7 +503,7 @@ export default function Certifications() {
                       textDecoration: 'none',
                     }}
                   >
-                    Official Verification &rarr;
+                    Official Portal &rarr;
                   </a>
                 </div>
               </div>
