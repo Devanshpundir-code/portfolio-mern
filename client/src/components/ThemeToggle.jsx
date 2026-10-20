@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('portfolio-theme') || 
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    return localStorage.getItem('portfolio-theme') || 'light';
   });
 
   useEffect(() => {
