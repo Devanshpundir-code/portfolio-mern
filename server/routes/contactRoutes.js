@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+import { submitContact, getAllMessages } from '../controllers/contactController.js';
+
 const router = express.Router();
-const { submitContact, getAllMessages } = require('../controllers/contactController');
 
 router.post('/', submitContact);
 router.get('/messages', getAllMessages);
 
-module.exports = router;
+export default router;

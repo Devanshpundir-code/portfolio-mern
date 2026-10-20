@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+import { downloadPdfResume, downloadDocxResume } from '../controllers/resumeController.js';
+
 const router = express.Router();
-const { downloadPdfResume, downloadDocxResume } = require('../controllers/resumeController');
 
 router.get('/pdf', downloadPdfResume);
 router.get('/docx', downloadDocxResume);
 
-module.exports = router;
+export default router;

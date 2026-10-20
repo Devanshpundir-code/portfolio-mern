@@ -67,7 +67,7 @@ const projects = [
   }
 ];
 
-const getProjects = (req, res) => {
+export const getProjects = (req, res) => {
   const { tech, category } = req.query;
   let filtered = [...projects];
 
@@ -90,7 +90,7 @@ const getProjects = (req, res) => {
   });
 };
 
-const getProjectById = (req, res) => {
+export const getProjectById = (req, res) => {
   const project = projects.find(p => p.id === req.params.id);
   if (!project) {
     return res.status(404).json({
@@ -103,9 +103,4 @@ const getProjectById = (req, res) => {
     success: true,
     data: project
   });
-};
-
-module.exports = {
-  getProjects,
-  getProjectById
 };

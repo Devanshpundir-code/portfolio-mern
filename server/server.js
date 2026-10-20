@@ -1,17 +1,20 @@
-const path = require('path');
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import contactRoutes from './routes/contactRoutes.js';
+import resumeRoutes from './routes/resumeRoutes.js';
+import projectRoutes from './routes/projectRoutes.js';
+import errorHandler from './middleware/errorHandler.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '../.env') });
 dotenv.config({ path: path.join(__dirname, '.env') });
-
-const { connectDB } = require('./config/db');
-const contactRoutes = require('./routes/contactRoutes');
-const resumeRoutes = require('./routes/resumeRoutes');
-const projectRoutes = require('./routes/projectRoutes');
-const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -20,9 +23,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, or Postman)
       if (!origin) return callback(null, true);
-
       const allowed = [
         'http://localhost:5173',
         'http://localhost:3000',
@@ -35,7 +36,7 @@ app.use(
       if (allowed.some(url => origin.startsWith(url))) {
         return callback(null, true);
       }
-      return callback(null, true); // Dev-friendly permissive CORS
+      return callback(null, true);
     },
     credentials: true
   })
@@ -43,6 +44,19 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serverless DB Connection Middleware:
+// Ensures cached database connection is established across Vercel serverless function invocations
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/api') && req.path !== '/api/health') {
+    try {
+      await connectDB();
+    } catch (error) {
+      console.error('Database connection failed in serverless request lifecycle:', error.message);
+    }
+  }
+  next();
+});
 
 // Health Check Route
 app.get('/api/health', (req, res) => {
@@ -59,7 +73,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/resume', resumeRoutes);
 app.use('/api/projects', projectRoutes);
 
-// Production Static Serving for React SPA
+// Production Static Serving for React SPA (standalone Node)
 const clientDistPath = path.join(__dirname, '../client/dist');
 app.use(express.static(clientDistPath));
 
@@ -88,17 +102,26 @@ app.get('*', (req, res, next) => {
 // Error handling middleware
 app.use(errorHandler);
 
-// Only listen when run directly (not during Jest test runner)
-if (process.env.NODE_ENV !== 'test') {
-  connectDB().then(() => {
-    app.listen(PORT, () => {
-      console.log(`===============================================`);
-      console.log(`🚀 Portfolio Express Server running on port ${PORT}`);
-      console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`🔗 API Base: http://localhost:${PORT}/api`);
-      console.log(`===============================================`);
+// Standalone Server Initialization
+// (Only listen when running standalone locally, NOT inside Vercel serverless function)
+if (!process.env.VERCEL && process.env.NODE_ENV !== 'test') {
+  connectDB()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`===============================================`);
+        console.log(`🚀 Portfolio Express Server running on port ${PORT}`);
+        console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
+        console.log(`🔗 API Base: http://localhost:${PORT}/api`);
+        console.log(`===============================================`);
+      });
+    })
+    .catch((err) => {
+      console.error('Initial database connection failed on startup:', err.message);
+      // Still listen so healthcheck and non-db routes are available
+      app.listen(PORT, () => {
+        console.log(`🚀 Portfolio Express Server running on port ${PORT} (fallback mode)`);
+      });
     });
-  });
 }
 
-module.exports = app;
+export default app;
