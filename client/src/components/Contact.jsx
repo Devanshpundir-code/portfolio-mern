@@ -45,7 +45,7 @@ export default function Contact() {
     try {
       setStatus({ loading: true, success: false, error: null });
 
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://portfolio-mern-ix0t.onrender.com/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
