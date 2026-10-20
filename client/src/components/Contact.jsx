@@ -98,10 +98,10 @@ export default function Contact() {
               Whether it's robotics, intelligent systems, or a project worth building, I'd love to hear from you.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.95rem' }}>
               {/* Email */}
               <a
-                href="mailto:devansh7570@gmail.com"
+                href="mailto:devanshpundir477@gmail.com"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -112,12 +112,28 @@ export default function Contact() {
                 }}
               >
                 <span>✉️</span>
-                <span>devansh7570@gmail.com</span>
+                <span>devanshpundir477@gmail.com</span>
+              </a>
+
+              {/* Mobile Phone */}
+              <a
+                href="tel:8434950370"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  color: 'rgba(255, 255, 255, 0.95)',
+                  textDecoration: 'none',
+                  fontSize: '0.95rem',
+                }}
+              >
+                <span>📞</span>
+                <span>+91 8434950370</span>
               </a>
 
               {/* LinkedIn */}
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/devansh-pundir-41a086233/"
                 target="_blank"
                 rel="noreferrer"
                 style={{
@@ -130,7 +146,7 @@ export default function Contact() {
                 }}
               >
                 <span>💼</span>
-                <span>LinkedIn</span>
+                <span>linkedin.com/in/devansh-pundir</span>
               </a>
 
               {/* GitHub */}
@@ -148,12 +164,12 @@ export default function Contact() {
                 }}
               >
                 <span>🐙</span>
-                <span>GitHub</span>
+                <span>github.com/Devanshpundir-code</span>
               </a>
 
               {/* Website */}
               <a
-                href="https://www.dyoraarobotics.in"
+                href="http://www.dyoraarobotics.in"
                 target="_blank"
                 rel="noreferrer"
                 style={{
