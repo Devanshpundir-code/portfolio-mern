@@ -8,10 +8,9 @@ export default function Contact() {
   });
 
   const [status, setStatus] = useState({
-    submitting: false,
+    loading: false,
     success: false,
     error: null,
-    message: '',
   });
 
   const handleChange = (e) => {
@@ -20,297 +19,303 @@ export default function Contact() {
       [e.target.name]: e.target.value,
     }));
     if (status.error || status.success) {
-      setStatus((prev) => ({ ...prev, error: null, success: false }));
+      setStatus({ loading: false, success: false, error: null });
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic client validation
     if (!formData.name.trim()) {
-      setStatus({ submitting: false, success: false, error: 'Please enter your name.', message: '' });
+      setStatus({ loading: false, success: false, error: 'Please provide your name.' });
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email.trim())) {
-      setStatus({ submitting: false, success: false, error: 'Please enter a valid email address.', message: '' });
+      setStatus({ loading: false, success: false, error: 'Please provide a valid email address.' });
       return;
     }
 
     if (formData.message.trim().length < 10) {
-      setStatus({ submitting: false, success: false, error: 'Message must be at least 10 characters long.', message: '' });
+      setStatus({ loading: false, success: false, error: 'Message must be at least 10 characters long.' });
       return;
     }
 
     try {
-      setStatus({ submitting: true, success: false, error: null, message: '' });
+      setStatus({ loading: true, success: false, error: null });
 
-      const response = await fetch('/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const data = await res.json();
 
-      if (response.ok && data.success) {
+      if (res.ok && data.success) {
         setStatus({
-          submitting: false,
+          loading: false,
           success: true,
           error: null,
-          message: data.message || 'Message sent and stored in MongoDB successfully!',
         });
         setFormData({ name: '', email: '', message: '' });
       } else {
         setStatus({
-          submitting: false,
+          loading: false,
           success: false,
           error: data.message || 'Failed to submit message. Please try again.',
-          message: '',
         });
       }
-    } catch (err) {
+    } catch {
       setStatus({
-        submitting: false,
+        loading: false,
         success: false,
-        error: 'Network error connecting to backend API. Please verify server is running.',
-        message: '',
+        error: 'Unable to connect to Express backend. Please ensure the server is active.',
       });
     }
   };
 
   return (
-    <section id="contact">
+    <section id="contact" className="chalkboard-section" style={{ padding: '5.5rem 0 6rem' }}>
       <div className="container">
-        <div className="section-title-wrap">
-          <span className="section-tag">// 06. GET IN TOUCH //</span>
-          <h2 className="section-title">Contact Me</h2>
-          <p className="section-subtitle">
-            Send a message directly to my inbox and MongoDB database via the Express REST API.
-          </p>
-        </div>
-
         <div
+          className="contact-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '3rem',
-            alignItems: 'start',
+            gridTemplateColumns: '1fr 1.15fr 0.85fr',
+            gap: '2.5rem',
+            alignItems: 'center',
           }}
         >
-          {/* Direct contact info card */}
-          <div className="sketch-card">
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem' }}>
-              Let's build something remarkable
-            </h3>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '1.75rem', lineHeight: 1.6 }}>
-              Whether you have an inquiry about full-stack web engineering, custom PCB design, autonomous robotics, or potential job opportunities, I’d love to connect.
+          {/* Left Column: Direct Inquiries */}
+          <div>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.7rem)', fontWeight: 800, color: '#ffffff', lineHeight: 1.15, marginBottom: '1rem' }}>
+              Have an interesting idea?
+            </h2>
+
+            <p style={{ color: 'rgba(255, 255, 255, 0.75)', fontSize: '0.98rem', lineHeight: 1.6, marginBottom: '2rem' }}>
+              Whether it's robotics, intelligent systems, or a project worth building, I'd love to hear from you.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div
-                  style={{
-                    width: '38px',
-                    height: '38px',
-                    borderRadius: '50%',
-                    border: '2px solid var(--border-color)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'var(--bg-tertiary)',
-                  }}
-                >
-                  📧
-                </div>
-                <div>
-                  <div className="mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                    Email
-                  </div>
-                  <a
-                    href="mailto:devanshpundir477@gmail.com"
-                    style={{ color: 'var(--text-primary)', fontWeight: 700, textDecoration: 'none' }}
-                  >
-                    devanshpundir477@gmail.com
-                  </a>
-                </div>
-              </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              {/* Email */}
+              <a
+                href="mailto:devansh7570@gmail.com"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontSize: '0.95rem',
+                }}
+              >
+                <span>✉️</span>
+                <span>devansh7570@gmail.com</span>
+              </a>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div
-                  style={{
-                    width: '38px',
-                    height: '38px',
-                    borderRadius: '50%',
-                    border: '2px solid var(--border-color)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'var(--bg-tertiary)',
-                  }}
-                >
-                  📍
-                </div>
-                <div>
-                  <div className="mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                    Location
-                  </div>
-                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>
-                    Jodhpur / Jaipur, India
-                  </span>
-                </div>
-              </div>
+              {/* LinkedIn */}
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  color: 'rgba(255, 255, 255, 0.85)',
+                  textDecoration: 'none',
+                  fontSize: '0.95rem',
+                }}
+              >
+                <span>💼</span>
+                <span>LinkedIn</span>
+              </a>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div
-                  style={{
-                    width: '38px',
-                    height: '38px',
-                    borderRadius: '50%',
-                    border: '2px solid var(--border-color)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'var(--bg-tertiary)',
-                  }}
-                >
-                  🐙
-                </div>
-                <div>
-                  <div className="mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                    GitHub Profile
-                  </div>
-                  <a
-                    href="https://github.com/Devanshpundir-code"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{ color: 'var(--text-primary)', fontWeight: 700, textDecoration: 'none' }}
-                  >
-                    github.com/Devanshpundir-code
-                  </a>
-                </div>
-              </div>
-            </div>
+              {/* GitHub */}
+              <a
+                href="https://github.com/Devanshpundir-code"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  color: 'rgba(255, 255, 255, 0.85)',
+                  textDecoration: 'none',
+                  fontSize: '0.95rem',
+                }}
+              >
+                <span>🐙</span>
+                <span>GitHub</span>
+              </a>
 
-            {/* Resume Download CTAs */}
-            <div style={{ borderTop: '1.5px dashed var(--border-color)', paddingTop: '1.5rem' }}>
-              <div className="mono" style={{ fontSize: '0.82rem', fontWeight: 700, marginBottom: '0.75rem' }}>
-                OFFICIAL RESUME DOWNLOADS:
-              </div>
-              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <a
-                  href="/api/resume/pdf"
-                  className="btn btn-primary btn-sm"
-                  download="Devansh_Pundir_Resume.pdf"
-                >
-                  Download PDF
-                </a>
-                <a
-                  href="/api/resume/docx"
-                  className="btn btn-sm"
-                  download="Devansh_Pundir_Resume.docx"
-                >
-                  Download Word (.docx)
-                </a>
-              </div>
+              {/* Website */}
+              <a
+                href="https://www.dyoraarobotics.in"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  color: 'rgba(255, 255, 255, 0.85)',
+                  textDecoration: 'none',
+                  fontSize: '0.95rem',
+                }}
+              >
+                <span>🌐</span>
+                <span>www.dyoraarobotics.in</span>
+              </a>
             </div>
           </div>
 
-          {/* Contact form card */}
-          <div className="sketch-card">
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem' }}>
-              Send a Direct Message
-            </h3>
+          {/* Center Column: Form & Cartoon Illustration */}
+          <div style={{ position: 'relative' }}>
+            {/* Hand-Drawn Speech Bubble */}
+            <div
+              className="handwritten animate-float"
+              style={{
+                position: 'absolute',
+                top: '-45px',
+                left: '-20px',
+                border: '1.5px solid #ffffff',
+                borderRadius: '160px 20px 170px 20px/20px 170px 20px 160px',
+                padding: '0.4rem 0.85rem',
+                backgroundColor: '#111215',
+                color: '#ffffff',
+                fontSize: '0.88rem',
+                textAlign: 'center',
+                lineHeight: 1.25,
+                zIndex: 2,
+              }}
+            >
+              Let's build<br />something great!
+            </div>
 
-            {status.success && (
-              <div className="alert-box alert-success">
-                <span>✓</span>
-                <span>{status.message}</span>
-              </div>
-            )}
+            {/* Form */}
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+              {status.success && (
+                <div
+                  style={{
+                    backgroundColor: 'rgba(34, 197, 94, 0.15)',
+                    border: '1.5px solid #22c55e',
+                    borderRadius: '8px',
+                    padding: '0.75rem 1rem',
+                    color: '#22c55e',
+                    fontSize: '0.88rem',
+                    fontWeight: 700,
+                  }}
+                >
+                  ✓ Thank you! Message sent and saved to MongoDB database.
+                </div>
+              )}
 
-            {status.error && (
-              <div className="alert-box alert-error">
-                <span>⚠</span>
-                <span>{status.error}</span>
-              </div>
-            )}
+              {status.error && (
+                <div
+                  style={{
+                    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                    border: '1.5px solid #ef4444',
+                    borderRadius: '8px',
+                    padding: '0.75rem 1rem',
+                    color: '#ef4444',
+                    fontSize: '0.88rem',
+                    fontWeight: 700,
+                  }}
+                >
+                  ⚠ {status.error}
+                </div>
+              )}
 
-            <form onSubmit={handleSubmit} noValidate>
-              <div className="form-group">
-                <label htmlFor="name" className="form-label">
-                  Your Full Name *
-                </label>
+              <div>
                 <input
-                  id="name"
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="e.g. Jane Doe"
-                  className="form-input"
+                  placeholder="Name *"
+                  className="chalkboard-input"
                   required
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="email" className="form-label">
-                  Your Email Address *
-                </label>
+              <div>
                 <input
-                  id="email"
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="e.g. jane@company.com"
-                  className="form-input"
+                  placeholder="Email *"
+                  className="chalkboard-input"
                   required
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="message" className="form-label">
-                  Your Message *
-                </label>
+              <div>
                 <textarea
-                  id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Write your message or inquiry here (minimum 10 characters)..."
-                  className="form-textarea"
+                  placeholder="Message *"
+                  className="chalkboard-textarea"
                   required
                 />
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.35rem' }}>
-                  <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    {formData.message.length} / 2000 chars
-                  </span>
-                </div>
               </div>
 
               <button
                 type="submit"
-                disabled={status.submitting}
-                className="btn btn-primary"
-                style={{ width: '100%', cursor: status.submitting ? 'not-allowed' : 'pointer' }}
+                disabled={status.loading}
+                className="btn"
+                style={{
+                  alignSelf: 'flex-start',
+                  backgroundColor: '#ffffff',
+                  color: '#111215',
+                  border: 'none',
+                  boxShadow: 'none',
+                  padding: '0.65rem 1.6rem',
+                  cursor: status.loading ? 'wait' : 'pointer',
+                }}
               >
-                {status.submitting ? (
-                  <>
-                    <span className="mono">Persisting to MongoDB...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Send Message</span>
-                    <span>&rarr;</span>
-                  </>
-                )}
+                {status.loading ? 'Sending...' : 'Send Message →'}
               </button>
             </form>
+          </div>
+
+          {/* Right Column: Sketch Laptop & Formula */}
+          <div style={{ textAlign: 'center', position: 'relative' }}>
+            <svg viewBox="0 0 240 220" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', maxWidth: '240px', margin: '0 auto' }}>
+              {/* Lightbulb Idea */}
+              <circle cx="120" cy="35" r="14" />
+              <line x1="114" y1="49" x2="126" y2="49" />
+              <line x1="120" y1="12" x2="120" y2="18" />
+              <line x1="102" y1="20" x2="108" y2="24" />
+              <line x1="138" y1="20" x2="132" y2="24" />
+
+              {/* Laptop with </> */}
+              <polygon points="40,90 200,90 190,160 50,160" />
+              <polygon points="30,160 210,160 225,175 15,175" />
+              <text x="120" y="132" textAnchor="middle" fontSize="24" fontWeight="800" fill="#ffffff" stroke="none" fontFamily="monospace">
+                &lt;/&gt;
+              </text>
+
+              {/* Coffee mug */}
+              <rect x="25" y="145" width="16" height="20" rx="3" />
+              <path d="M 41,150 Q 48,155 41,160" />
+            </svg>
+
+            {/* Ideas -> Products -> Impact */}
+            <div
+              className="handwritten"
+              style={{
+                marginTop: '1rem',
+                fontSize: '1.25rem',
+                color: '#ffffff',
+                lineHeight: 1.4,
+              }}
+            >
+              Ideas &rarr; Products &rarr; Impact
+            </div>
           </div>
         </div>
       </div>

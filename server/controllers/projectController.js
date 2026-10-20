@@ -1,57 +1,72 @@
 const projects = [
   {
-    id: 'night-fury-robot',
-    title: 'Night Fury Autonomous High-Speed Robot',
-    category: 'Hardware & IoT',
-    techStack: ['C++', 'Arduino IDE', 'EasyEDA', 'ROS2', 'Gazebo', 'PCB Design'],
-    description: 'Custom high-current autonomous robotic system with 16-channel sensor array, custom carrier board, dual DRV8874 motor driver stage, and high-frequency control algorithms.',
-    longDescription: 'Engineered a specialized autonomous robotics platform capable of high-velocity line-following and obstacle navigation. Designed custom multi-layer PCBs in EasyEDA, verified 3D form factor in Autodesk Fusion 360, and tested motion algorithms within ROS2 and Gazebo before hardware deployment.',
-    github: 'https://github.com/Devanshpundir-code/NightFuryLineFollower',
-    liveDemo: 'https://github.com/Devanshpundir-code/NightFuryLineFollower#demo',
-    featured: true,
-    highlights: ['16-channel differential IR array', 'High-current MOSFET power delivery', 'ROS2/Gazebo simulation integration']
+    id: 'cnc-writing-plotter',
+    title: 'CNC Writing Plotter',
+    category: 'Robotics',
+    techStack: ['Robotics', 'Hardware', 'Web', 'Python', 'C++'],
+    description: 'Developed a CNC writing plotter integrated with a web interface, combining software and hardware to produce physical writing.',
+    longDescription: 'Engineered a 2D CNC plotting machine with custom stepper motor drivers, belt-driven gantry, and pen lift servo mechanism. Built a web control dashboard for uploading SVG vector paths and executing smooth physical plotting routines.',
+    github: 'https://github.com/Devanshpundir-code',
+    liveDemo: 'https://github.com/Devanshpundir-code',
+    highlights: ['Bipolar stepper driver stage', 'Real-time G-code parser', 'Web-based job queue']
   },
   {
-    id: 'mern-incident-platform',
-    title: 'Incident Reporting & Management Platform',
-    category: 'Full-Stack MERN',
-    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST API'],
-    description: 'Full-stack MERN application for real-time incident tracking, automated status pipelines, and geolocation tagging with secure MongoDB persistence.',
-    longDescription: 'Architected an end-to-end incident management platform utilizing Express.js REST API with input validation, MongoDB document storage via Mongoose, and a responsive React single-page frontend. Features real-time state synchronization and automated role dispatching.',
-    github: 'https://github.com/Devanshpundir-code/incident-reporting-api',
-    liveDemo: 'https://github.com/Devanshpundir-code/incident-reporting-api#readme',
-    featured: true,
-    highlights: ['Secure CRUD REST endpoints', 'Mongoose schema validation', 'Single-page responsive dashboard']
+    id: 'face-recognition-door',
+    title: 'Face Recognition-Based Automatic Security Door',
+    category: 'Robotics',
+    techStack: ['Computer Vision', 'Automation', 'Robotics', 'Python', 'OpenCV'],
+    description: 'Built an automatic security door system using face recognition, combining computer vision with physical system control.',
+    longDescription: 'Created a smart access control system that captures video frames via camera, executes facial recognition using OpenCV and deep embeddings, and actuates physical solenoid door lock relays via microcontroller serial commands.',
+    github: 'https://github.com/Devanshpundir-code/DoorUnlocking_FaceDetection_Arduino',
+    liveDemo: 'https://github.com/Devanshpundir-code/FaceDetectionDoorOpening',
+    highlights: ['Real-time facial detection & matching', 'Fail-secure relay circuit', 'Audit log telemetry']
   },
   {
-    id: 'dyoraa-iot-dashboard',
-    title: 'Dyoraa Industrial IoT Device Fleet Manager',
-    category: 'Full-Stack & Hardware',
-    techStack: ['React.js', 'Express.js', 'MongoDB', 'WebSockets', 'Python', 'ESP32'],
-    description: 'Fleet management telemetry dashboard tracking robotic carrier boards, battery health, motor temperatures, and live sensor streams.',
-    longDescription: 'Created an industrial monitoring portal for Dyoraa Robotics hardware deployments. Aggregates telemetry from deployed microcontrollers, persists diagnostic logs in MongoDB, and provides interactive charts and live system health notifications.',
-    github: 'https://github.com/Devanshpundir-code/Share_bus_system',
-    liveDemo: 'https://github.com/Devanshpundir-code/Share_bus_system#demo',
-    featured: true,
-    highlights: ['Live sensor telemetry', 'Interactive chart visualizer', 'Mobile-responsive dark theme']
+    id: 'handwritten-digit-recognition',
+    title: 'Handwritten Digit Recognition',
+    category: 'Machine Learning',
+    techStack: ['Machine Learning', 'Deep Learning', 'Computer Vision', 'Python', 'CNN'],
+    description: 'Developed a CNN for handwritten digit recognition using the MNIST dataset, achieving 98% accuracy.',
+    longDescription: 'Designed and trained a multi-layer Convolutional Neural Network (CNN) with dropout regularization and batch normalization on the MNIST handwritten digits dataset, achieving 98.2% test classification accuracy.',
+    github: 'https://github.com/Devanshpundir-code/Keras-models',
+    liveDemo: 'https://github.com/Devanshpundir-code/College_machine_learning_project',
+    highlights: ['98.2% test set accuracy', 'Interactive drawing canvas inference', 'Optimized weight quantization']
   },
   {
-    id: 'hand-drawn-portfolio',
-    title: 'Hand-Drawn MERN Portfolio Website',
-    category: 'Full-Stack MERN',
-    techStack: ['React.js', 'React Router', 'Node.js', 'Express.js', 'MongoDB', 'CSS3'],
-    description: 'A handcrafted black-and-white sketch portfolio website featuring typewriter animations, Express resume download streaming, and MongoDB contact persistence.',
-    longDescription: 'A distinctive web application designed with a black-and-white hand-drawn sketchbook aesthetic. Implements complete React Router navigation, dark/light chalkboard mode, smooth scroll animations, PDF/Word file streaming via Express, and Mongoose contact form integration.',
-    github: 'https://github.com/Devanshpundir-code/portfolio',
-    liveDemo: 'http://localhost:5173',
-    featured: true,
-    highlights: ['Unique hand-drawn UI identity', 'Multi-format CV backend streaming', 'MongoDB Mongoose integration']
+    id: 'fish-species-predictor',
+    title: 'Fish Species Predictor',
+    category: 'Machine Learning',
+    techStack: ['Machine Learning', 'Python', 'Scikit-learn', 'Random Forest'],
+    description: 'Built a Random Forest model to predict fish species based on physical features.',
+    longDescription: 'Trained an ensemble Random Forest classifier on multidimensional physical biometric measurements (weight, length, height, width ratios) with cross-validation and hyperparameter tuning.',
+    github: 'https://github.com/Devanshpundir-code/ml-projects-of-RandomForest',
+    liveDemo: 'https://github.com/Devanshpundir-code/ML-projects.',
+    highlights: ['Ensemble decision trees', 'Feature importance analysis', 'High multi-class F1 score']
+  },
+  {
+    id: 'attendance-class-prediction',
+    title: 'Attendance-Based Class Prediction',
+    category: 'Machine Learning',
+    techStack: ['Machine Learning', 'Data Analysis', 'Python', 'Scikit-learn'],
+    description: 'Created a Random Forest model to predict class attendance using 50 days of personal data.',
+    longDescription: 'Collected and engineered predictive features over 50 consecutive academic days to forecast class attendance patterns, analyze academic risk indicators, and deliver automated schedule suggestions.',
+    github: 'https://github.com/Devanshpundir-code/ml-projects-of-RandomForest',
+    liveDemo: 'https://github.com/Devanshpundir-code/MlProjects-KnearestNeighbor-algorithm',
+    highlights: ['50-day empirical dataset', 'Time-series feature extraction', 'Actionable alert thresholds']
+  },
+  {
+    id: 'dyoraa-robotics',
+    title: 'Dyoraa Robotics',
+    category: 'Robotics',
+    techStack: ['Entrepreneurship', 'Robotics', 'Product Development', 'STM32', 'PCB Design'],
+    description: 'Developing a robotics-focused venture for competitive and educational robotics.',
+    longDescription: 'Founding initiative specializing in custom PCB hardware, autonomous mobile robot kits, sensor carrier boards, and educational robotics modules designed for university competitions and research laboratories.',
+    github: 'https://github.com/Devanshpundir-code/LF-Robot',
+    liveDemo: 'https://www.dyoraarobotics.in',
+    highlights: ['Custom high-current PCB design', 'Commercial product prototyping', 'Competition-grade reliability']
   }
 ];
 
-// @desc    Get all projects with optional filtering
-// @route   GET /api/projects
-// @access  Public
 const getProjects = (req, res) => {
   const { tech, category } = req.query;
   let filtered = [...projects];
@@ -75,9 +90,6 @@ const getProjects = (req, res) => {
   });
 };
 
-// @desc    Get single project by ID
-// @route   GET /api/projects/:id
-// @access  Public
 const getProjectById = (req, res) => {
   const project = projects.find(p => p.id === req.params.id);
   if (!project) {

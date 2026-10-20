@@ -1,132 +1,180 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [hoveredSkill, setHoveredSkill] = useState(null);
-
-  const categories = ['All', 'Frontend', 'Backend & DB', 'Tools & Tech', 'Hardware & IoT'];
-
-  const skillsData = [
-    // Frontend
-    { name: 'React.js', level: 90, category: 'Frontend', note: 'Hooks, Context, React Router, Virtual DOM optimization' },
-    { name: 'JavaScript (ES6+)', level: 88, category: 'Frontend', note: 'Async/Await, Closures, Event Loop, DOM manipulation' },
-    { name: 'HTML5 & CSS3', level: 92, category: 'Frontend', note: 'Semantic HTML, Responsive Flexbox/Grid, Animations' },
-    { name: 'React Router', level: 85, category: 'Frontend', note: 'Dynamic routing, nested routes, protected loaders' },
-    
-    // Backend & DB
-    { name: 'Node.js', level: 85, category: 'Backend & DB', note: 'Event-driven architecture, file streaming, npm modules' },
-    { name: 'Express.js', level: 88, category: 'Backend & DB', note: 'REST API routing, middleware, controllers, error handlers' },
-    { name: 'MongoDB', level: 84, category: 'Backend & DB', note: 'Document modeling, indexing, aggregation pipelines' },
-    { name: 'Mongoose', level: 86, category: 'Backend & DB', note: 'Schema design, validation hooks, population, queries' },
-
-    // Tools & Tech
-    { name: 'Git & GitHub', level: 90, category: 'Tools & Tech', note: 'Version control, branch workflows, pull requests' },
-    { name: 'Postman', level: 88, category: 'Tools & Tech', note: 'REST endpoint testing, collection runners, environment mocking' },
-    { name: 'Linux / Ubuntu', level: 82, category: 'Tools & Tech', note: 'Shell scripting, package management, service configuration' },
-    { name: 'Vite & Bundlers', level: 85, category: 'Tools & Tech', note: 'Fast HMR, production build optimization, asset pipeline' },
-
-    // Hardware & IoT
-    { name: 'EasyEDA & PCB Design', level: 92, category: 'Hardware & IoT', note: 'Schematic capture, multi-layer routing, Gerber export' },
-    { name: 'Autodesk Fusion 360', level: 80, category: 'Hardware & IoT', note: '3D modeling of robot chassis, component enclosures' },
-    { name: 'Arduino IDE & C++', level: 86, category: 'Hardware & IoT', note: 'Firmware programming, sensor arrays, motor control' },
-    { name: 'ROS2 & Gazebo', level: 78, category: 'Hardware & IoT', note: 'Robotic simulation, publisher/subscriber nodes, topics' },
+  const toolCategories = [
+    {
+      title: 'PROGRAMMING',
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+      ),
+      skills: ['Python', 'C', 'C++'],
+    },
+    {
+      title: 'ROBOTICS AND EMBEDDED SYSTEMS',
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="4" y="4" width="16" height="16" rx="2" />
+          <rect x="9" y="9" width="6" height="6" />
+          <line x1="9" y1="1" x2="9" y2="4" />
+          <line x1="15" y1="1" x2="15" y2="4" />
+          <line x1="9" y1="20" x2="9" y2="23" />
+          <line x1="15" y1="20" x2="15" y2="23" />
+          <line x1="20" y1="9" x2="23" y2="9" />
+          <line x1="20" y1="14" x2="23" y2="14" />
+          <line x1="1" y1="9" x2="4" y2="9" />
+          <line x1="1" y1="14" x2="4" y2="14" />
+        </svg>
+      ),
+      skills: [
+        'STM32 | ESP32',
+        'Microcontrollers',
+        'Embedded C/C++',
+        'Motor control',
+        'Sensor integration',
+        'Hardware-software integration',
+      ],
+    },
+    {
+      title: 'HARDWARE DESIGN',
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="6" cy="6" r="3" />
+          <circle cx="6" cy="18" r="3" />
+          <line x1="20" y1="4" x2="20" y2="8" />
+          <line x1="20" y1="16" x2="20" y2="20" />
+          <line x1="6" y1="9" x2="6" y2="15" />
+          <path d="M 6,9 L 14,9 L 20,4" />
+          <path d="M 6,15 L 14,15 L 20,20" />
+        </svg>
+      ),
+      skills: ['PCB Design', 'Circuit Design', 'Electronics Prototyping'],
+    },
+    {
+      title: 'ROBOTICS SIMULATION',
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="11" width="18" height="10" rx="2" />
+          <circle cx="12" cy="5" r="2" />
+          <path d="M 12,7 L 12,11" />
+          <line x1="8" y1="16" x2="8" y2="16.01" />
+          <line x1="16" y1="16" x2="16" y2="16.01" />
+        </svg>
+      ),
+      skills: ['ROS2', 'Gazebo', 'RViz'],
+    },
+    {
+      title: 'MACHINE LEARNING AND COMPUTER VISION',
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M 12 2a4 4 0 0 1 4 4c0 1.5-.8 2.8-2 3.5V11h-4V9.5C8.8 8.8 8 7.5 8 6a4 4 0 0 1 4-4z" />
+          <path d="M 9 15v-2h6v2a3 3 0 0 1-6 0z" />
+          <path d="M 6 18h12" />
+        </svg>
+      ),
+      skills: ['Machine Learning', 'Scikit-learn', 'OpenCV', 'CNN', 'Random Forest'],
+    },
+    {
+      title: 'TOOLS & HARDWARE PROTOTYPING',
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+        </svg>
+      ),
+      skills: ['EasyEDA', 'Autodesk Fusion 360', 'Arduino IDE', 'Git / GitHub', 'Linux / Ubuntu'],
+    },
   ];
 
-  const filteredSkills = activeCategory === 'All' 
-    ? skillsData 
-    : skillsData.filter(s => s.category === activeCategory);
-
   return (
-    <section id="skills">
+    <section id="skills" className="chalkboard-section">
       <div className="container">
-        <div className="section-title-wrap">
-          <span className="section-tag">// 02. CAPABILITIES //</span>
-          <h2 className="section-title">Skills & Expertise</h2>
-          <p className="section-subtitle">
-            Interactive proficiency bars with category filters and detailed skill tooltips.
-          </p>
+        {/* Section Header */}
+        <div className="section-header" style={{ color: '#ffffff', marginBottom: '3rem' }}>
+          <svg className="sketch-squiggle" viewBox="0 0 35 15">
+            <path d="M 2,12 Q 10,2 18,10 T 32,5" />
+          </svg>
+          <h2 style={{ color: '#ffffff' }}>Tools I build with.</h2>
         </div>
 
-        {/* Category Tabs */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '0.65rem',
-            justifyContent: 'center',
-            marginBottom: '3rem',
-          }}
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`btn btn-sm ${activeCategory === cat ? 'btn-primary' : ''}`}
-              style={{
-                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Skills Grid */}
+        {/* 6 Columns / Cards Grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '1.75rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem',
           }}
         >
-          {filteredSkills.map((skill) => (
+          {toolCategories.map((cat, idx) => (
             <div
-              key={skill.name}
-              className="sketch-card-sm"
-              onMouseEnter={() => setHoveredSkill(skill.name)}
-              onMouseLeave={() => setHoveredSkill(null)}
-              style={{ position: 'relative' }}
+              key={idx}
+              className="chalkboard-card"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
             >
+              {/* Card Header with Icon */}
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'baseline',
-                  marginBottom: '0.5rem',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span style={{ fontWeight: 800, fontSize: '1.05rem' }}>{skill.name}</span>
-                  <span className="badge" style={{ fontSize: '0.7rem' }}>{skill.category}</span>
-                </div>
-                <span className="mono" style={{ fontWeight: 700, fontSize: '0.95rem' }}>
-                  {skill.level}%
-                </span>
-              </div>
-
-              {/* Progress Track & Fill */}
-              <div className="progress-track">
-                <div
-                  className="progress-fill"
-                  style={{ width: `${skill.level}%` }}
-                ></div>
-              </div>
-
-              {/* Hover Tooltip / Detail */}
-              <div
-                style={{
-                  marginTop: '0.65rem',
-                  fontSize: '0.85rem',
-                  color: 'var(--text-secondary)',
-                  fontFamily: 'var(--font-mono)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.35rem',
+                  gap: '0.65rem',
+                  marginBottom: '1.25rem',
+                  paddingBottom: '0.75rem',
+                  borderBottom: '1px dashed rgba(255, 255, 255, 0.2)',
                 }}
               >
-                <span style={{ color: 'var(--border-color)', fontWeight: 700 }}>&bull;</span>
-                <span>{skill.note}</span>
+                <div style={{ color: '#ffffff' }}>{cat.icon}</div>
+                <h3
+                  className="mono"
+                  style={{
+                    fontSize: '0.85rem',
+                    fontWeight: 800,
+                    letterSpacing: '0.5px',
+                    color: '#ffffff',
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {cat.title}
+                </h3>
               </div>
+
+              {/* Skills List */}
+              <ul
+                style={{
+                  listStyle: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.55rem',
+                }}
+              >
+                {cat.skills.map((skill, sIdx) => (
+                  <li
+                    key={sIdx}
+                    style={{
+                      fontSize: '0.92rem',
+                      color: 'rgba(255, 255, 255, 0.85)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      transition: 'transform 0.15s ease, color 0.15s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.transform = 'translateX(4px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)';
+                      e.currentTarget.style.transform = 'translateX(0)';
+                    }}
+                  >
+                    <span style={{ opacity: 0.5 }}>&bull;</span>
+                    <span>{skill}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

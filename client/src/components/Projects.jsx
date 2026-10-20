@@ -1,137 +1,203 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const defaultProjects = [
-  {
-    id: 'night-fury-robot',
-    title: 'Night Fury Autonomous High-Speed Robot',
-    category: 'Hardware & IoT',
-    techStack: ['C++', 'Arduino IDE', 'EasyEDA', 'ROS2', 'Gazebo', 'PCB Design'],
-    description: 'Custom high-current autonomous robotic system with 16-channel sensor array, custom carrier board, dual DRV8874 motor driver stage, and high-frequency control algorithms.',
-    github: 'https://github.com/Devanshpundir-code/NightFuryLineFollower',
-    liveDemo: 'https://github.com/Devanshpundir-code/NightFuryLineFollower#demo',
-    featured: true,
-  },
-  {
-    id: 'mern-incident-platform',
-    title: 'Incident Reporting & Management Platform',
-    category: 'Full-Stack MERN',
-    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST API'],
-    description: 'Full-stack MERN application for real-time incident tracking, automated status pipelines, and geolocation tagging with secure MongoDB persistence.',
-    github: 'https://github.com/Devanshpundir-code/incident-reporting-api',
-    liveDemo: 'https://github.com/Devanshpundir-code/incident-reporting-api#readme',
-    featured: true,
-  },
-  {
-    id: 'dyoraa-iot-dashboard',
-    title: 'Dyoraa Industrial IoT Device Fleet Manager',
-    category: 'Full-Stack & Hardware',
-    techStack: ['React.js', 'Express.js', 'MongoDB', 'WebSockets', 'Python', 'ESP32'],
-    description: 'Fleet management telemetry dashboard tracking robotic carrier boards, battery health, motor temperatures, and live sensor streams.',
-    github: 'https://github.com/Devanshpundir-code/Share_bus_system',
-    liveDemo: 'https://github.com/Devanshpundir-code/Share_bus_system#demo',
-    featured: true,
-  },
-  {
-    id: 'hand-drawn-portfolio',
-    title: 'Hand-Drawn MERN Portfolio Website',
-    category: 'Full-Stack MERN',
-    techStack: ['React.js', 'React Router', 'Node.js', 'Express.js', 'MongoDB', 'CSS3'],
-    description: 'A handcrafted black-and-white sketch portfolio website featuring typewriter animations, Express resume download streaming, and MongoDB contact persistence.',
-    github: 'https://github.com/Devanshpundir-code/portfolio',
-    liveDemo: 'http://localhost:5173',
-    featured: true,
-  },
-];
-
 export default function Projects() {
-  const [projects, setProjects] = useState(defaultProjects);
-  const [selectedTech, setSelectedTech] = useState('All');
-  const [loading, setLoading] = useState(false);
+  const [activeFilter, setActiveFilter] = useState('All');
 
-  // Fetch from Express API with fallback
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        setLoading(true);
-        const url = selectedTech === 'All' 
-          ? '/api/projects' 
-          : `/api/projects?tech=${encodeURIComponent(selectedTech)}`;
-        const res = await fetch(url);
-        if (res.ok) {
-          const json = await res.json();
-          if (json.data && json.data.length > 0) {
-            setProjects(json.data);
-          }
-        }
-      } catch {
-        // Fallback to local filter
-        if (selectedTech === 'All') {
-          setProjects(defaultProjects);
-        } else {
-          setProjects(
-            defaultProjects.filter((p) =>
-              p.techStack.some((t) => t.toLowerCase().includes(selectedTech.toLowerCase()))
-            )
-          );
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
+  const filters = ['All', 'Robotics', 'Embedded Systems', 'Machine Learning', 'Web'];
 
-    fetchProjects();
-  }, [selectedTech]);
+  const projects = [
+    {
+      id: 'cnc-writing-plotter',
+      title: 'CNC Writing Plotter',
+      description: 'Developed a CNC writing plotter integrated with a web interface, combining software and hardware to produce physical writing.',
+      tags: ['Robotics', 'Hardware', 'Web'],
+      category: ['Robotics', 'Embedded Systems', 'Web'],
+      github: 'https://github.com/Devanshpundir-code',
+      liveDemo: 'https://github.com/Devanshpundir-code',
+      illustration: (
+        <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+          {/* CNC Bed */}
+          <rect x="20" y="30" width="120" height="50" rx="3" />
+          <line x1="20" y1="55" x2="140" y2="55" strokeDasharray="3 2" />
+          {/* Gantry rails */}
+          <line x1="15" y1="20" x2="145" y2="20" strokeWidth="2.5" />
+          <line x1="60" y1="15" x2="60" y2="85" strokeWidth="2" />
+          {/* Pen carriage */}
+          <rect x="52" y="35" width="16" height="20" fill="var(--bg-primary)" />
+          <line x1="60" y1="55" x2="60" y2="70" strokeWidth="2.5" />
+          <circle cx="60" cy="70" r="1.5" fill="currentColor" />
+          {/* Stepper motor */}
+          <rect x="125" y="10" width="18" height="15" rx="2" fill="var(--bg-primary)" />
+        </svg>
+      ),
+    },
+    {
+      id: 'face-recognition-door',
+      title: 'Face Recognition-Based Automatic Security Door',
+      description: 'Built an automatic security door system using face recognition, combining computer vision with physical system control.',
+      tags: ['Computer Vision', 'Automation', 'Robotics'],
+      category: ['Robotics', 'Embedded Systems', 'Machine Learning'],
+      github: 'https://github.com/Devanshpundir-code/DoorUnlocking_FaceDetection_Arduino',
+      liveDemo: 'https://github.com/Devanshpundir-code/FaceDetectionDoorOpening',
+      illustration: (
+        <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+          {/* Door Frame */}
+          <rect x="35" y="10" width="55" height="80" rx="2" />
+          <line x1="80" y1="50" x2="84" y2="50" strokeWidth="2.5" />
+          {/* Person sketch at door */}
+          <circle cx="115" cy="30" r="9" />
+          <path d="M 103,60 Q 115,48 127,60 L 127,90 L 103,90 Z" />
+          {/* Scanner beam */}
+          <path d="M 40,25 L 110,28" strokeDasharray="2 2" />
+          <circle cx="40" cy="25" r="3" fill="currentColor" />
+        </svg>
+      ),
+    },
+    {
+      id: 'handwritten-digit-recognition',
+      title: 'Handwritten Digit Recognition',
+      description: 'Developed a CNN for handwritten digit recognition using the MNIST dataset, achieving 98% accuracy.',
+      tags: ['Machine Learning', 'Deep Learning', 'Computer Vision'],
+      category: ['Machine Learning'],
+      github: 'https://github.com/Devanshpundir-code/Keras-models',
+      liveDemo: 'https://github.com/Devanshpundir-code/College_machine_learning_project',
+      illustration: (
+        <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+          {/* Drawing Tablet / Notebook */}
+          <rect x="30" y="15" width="55" height="70" rx="3" />
+          {/* Digit 7 display */}
+          <text x="58" y="60" fontSize="38" fontWeight="800" textAnchor="middle" fill="currentColor" fontFamily="monospace">
+            7
+          </text>
+          {/* Output prediction screen */}
+          <rect x="95" y="25" width="45" height="45" rx="3" strokeDasharray="3 2" />
+          <line x1="102" y1="38" x2="130" y2="38" />
+          <line x1="102" y1="48" x2="125" y2="48" />
+          <line x1="102" y1="58" x2="133" y2="58" />
+        </svg>
+      ),
+    },
+    {
+      id: 'fish-species-predictor',
+      title: 'Fish Species Predictor',
+      description: 'Built a Random Forest model to predict fish species based on physical features.',
+      tags: ['Machine Learning', 'Python', 'Scikit-learn'],
+      category: ['Machine Learning'],
+      github: 'https://github.com/Devanshpundir-code/ml-projects-of-RandomForest',
+      liveDemo: 'https://github.com/Devanshpundir-code/ML-projects.',
+      illustration: (
+        <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+          {/* Hand-drawn fish sketch */}
+          <path d="M 25,50 Q 60,25 105,45 Q 120,40 135,30 L 128,50 L 135,70 Q 120,60 105,55 Q 60,75 25,50 Z" />
+          {/* Fish Eye */}
+          <circle cx="45" cy="48" r="3" fill="currentColor" />
+          {/* Fin */}
+          <path d="M 70,50 Q 80,62 90,52" />
+          {/* Scales pattern */}
+          <path d="M 60,40 Q 65,45 70,40" />
+          <path d="M 75,40 Q 80,45 85,40" />
+          <path d="M 67,48 Q 72,53 77,48" />
+        </svg>
+      ),
+    },
+    {
+      id: 'attendance-class-prediction',
+      title: 'Attendance-Based Class Prediction',
+      description: 'Created a Random Forest model to predict class attendance using 50 days of personal data.',
+      tags: ['Machine Learning', 'Data Analysis'],
+      category: ['Machine Learning'],
+      github: 'https://github.com/Devanshpundir-code/ml-projects-of-RandomForest',
+      liveDemo: 'https://github.com/Devanshpundir-code/MlProjects-KnearestNeighbor-algorithm',
+      illustration: (
+        <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+          {/* Axes */}
+          <line x1="25" y1="15" x2="25" y2="85" strokeWidth="2" />
+          <line x1="25" y1="85" x2="135" y2="85" strokeWidth="2" />
+          {/* Bar charts */}
+          <rect x="38" y="55" width="14" height="30" fill="var(--bg-primary)" />
+          <rect x="60" y="35" width="14" height="50" fill="var(--bg-primary)" />
+          <rect x="82" y="45" width="14" height="40" fill="var(--bg-primary)" />
+          <rect x="104" y="25" width="14" height="60" fill="var(--bg-primary)" />
+          {/* Trend line */}
+          <polyline points="45,50 67,30 89,40 111,20" strokeDasharray="3 2" />
+        </svg>
+      ),
+    },
+    {
+      id: 'dyoraa-robotics',
+      title: 'Dyoraa Robotics',
+      description: 'Developing a robotics-focused venture for competitive and educational robotics.',
+      tags: ['Entrepreneurship', 'Robotics', 'Product Development'],
+      category: ['Robotics', 'Embedded Systems'],
+      github: 'https://github.com/Devanshpundir-code/LF-Robot',
+      liveDemo: 'https://www.dyoraarobotics.in',
+      illustration: (
+        <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+          {/* Dyoraa Mascot Shield / Logo */}
+          <circle cx="80" cy="45" r="28" strokeWidth="2.5" />
+          <text x="80" y="52" textAnchor="middle" fontSize="16" fontWeight="900" fill="currentColor" fontFamily="monospace">
+            DR
+          </text>
+          <text x="80" y="86" textAnchor="middle" fontSize="12" fontWeight="800" fill="currentColor" letterSpacing="1px">
+            DYORAA
+          </text>
+        </svg>
+      ),
+    },
+  ];
 
-  const filterTags = ['All', 'React.js', 'Node.js', 'MongoDB', 'C++', 'EasyEDA'];
+  const filteredProjects = activeFilter === 'All'
+    ? projects
+    : projects.filter((p) => p.category.includes(activeFilter));
 
   return (
-    <section id="projects" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: 'var(--border-width) solid var(--border-color)', borderBottom: 'var(--border-width) solid var(--border-color)' }}>
+    <section id="projects" style={{ padding: '5rem 0 5.5rem' }}>
       <div className="container">
-        <div className="section-title-wrap">
-          <span className="section-tag">// 03. SHOWCASE //</span>
-          <h2 className="section-title">Featured Projects</h2>
-          <p className="section-subtitle">
-            Interactive project cards featuring full-stack web platforms and autonomous robotics hardware.
-          </p>
-        </div>
-
-        {/* Technology Filter Chips */}
+        {/* Section Header */}
         <div
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '0.6rem',
-            justifyContent: 'center',
-            marginBottom: '3rem',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '2.5rem',
+            gap: '1.5rem',
           }}
         >
-          <span className="mono" style={{ alignSelf: 'center', fontWeight: 700, fontSize: '0.85rem', marginRight: '0.3rem' }}>
-            Filter by Tech:
-          </span>
-          {filterTags.map((tech) => (
-            <button
-              key={tech}
-              onClick={() => setSelectedTech(tech)}
-              className={`btn btn-sm ${selectedTech === tech ? 'btn-primary' : ''}`}
-            >
-              {tech}
-            </button>
-          ))}
+          <div className="section-header" style={{ marginBottom: 0 }}>
+            <svg className="sketch-squiggle" viewBox="0 0 35 15">
+              <path d="M 2,12 Q 10,2 18,10 T 32,5" />
+            </svg>
+            <h2>Things I've built.</h2>
+          </div>
+
+          {/* Filter Pills */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+            {filters.map((f) => (
+              <button
+                key={f}
+                onClick={() => setActiveFilter(f)}
+                className={`filter-pill ${activeFilter === f ? 'active' : ''}`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Projects Cards Grid */}
+        {/* 6 Cards Grid (3 Columns) */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '2rem',
+            gap: '1.75rem',
           }}
         >
-          {projects.map((proj) => (
+          {filteredProjects.map((p) => (
             <div
-              key={proj.id}
-              className="sketch-card"
+              key={p.id}
+              className="sketch-box"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -139,30 +205,37 @@ export default function Projects() {
               }}
             >
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                  <span className="badge" style={{ backgroundColor: 'var(--bg-primary)' }}>
-                    {proj.category}
-                  </span>
-                  {proj.featured && (
-                    <span className="handwritten" style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
-                      ★ Featured
-                    </span>
-                  )}
+                {/* Sketch Drawing Frame */}
+                <div
+                  style={{
+                    height: '140px',
+                    backgroundColor: 'var(--bg-secondary)',
+                    borderRadius: '8px',
+                    border: '1.5px dashed var(--border-color)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '1.25rem',
+                    padding: '0.5rem',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {p.illustration}
                 </div>
 
-                <h3 style={{ fontSize: '1.35rem', marginBottom: '0.75rem' }}>
-                  {proj.title}
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.6rem', lineHeight: 1.3 }}>
+                  {p.title}
                 </h3>
 
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
-                  {proj.description}
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.55, marginBottom: '1.25rem' }}>
+                  {p.description}
                 </p>
 
-                {/* Tech Stack Badges */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.75rem' }}>
-                  {proj.techStack.map((tech) => (
-                    <span key={tech} className="badge">
-                      {tech}
+                {/* Badges */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.5rem' }}>
+                  {p.tags.map((t) => (
+                    <span key={t} className="badge-tag">
+                      {t}
                     </span>
                   ))}
                 </div>
@@ -172,54 +245,62 @@ export default function Projects() {
               <div
                 style={{
                   display: 'flex',
-                  gap: '0.75rem',
-                  flexWrap: 'wrap',
-                  borderTop: '1.5px dashed var(--border-color)',
-                  paddingTop: '1rem',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
+                  gap: '1rem',
+                  borderTop: '1px solid rgba(0,0,0,0.08)',
+                  paddingTop: '0.85rem',
                 }}
               >
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <a
-                    href={proj.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn btn-sm"
-                    title="View GitHub Repository"
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                    </svg>
-                    Code
-                  </a>
-
-                  <a
-                    href={proj.liveDemo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn btn-primary btn-sm"
-                    title="View Live Demo"
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                      <polyline points="15 3 21 3 21 9"></polyline>
-                      <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                    Live
-                  </a>
-                </div>
-
-                <Link
-                  to={`/project/${proj.id}`}
+                <a
+                  href={p.github}
+                  target="_blank"
+                  rel="noreferrer"
                   style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
                     fontSize: '0.88rem',
                     fontWeight: 700,
                     color: 'var(--text-primary)',
                     textDecoration: 'none',
-                    display: 'flex',
+                  }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                  GitHub
+                </a>
+
+                <a
+                  href={p.liveDemo}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.25rem',
+                    gap: '0.35rem',
+                    fontSize: '0.88rem',
+                    fontWeight: 700,
+                    color: 'var(--text-primary)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                  Live Demo
+                </a>
+
+                <Link
+                  to={`/project/${p.id}`}
+                  style={{
+                    marginLeft: 'auto',
+                    fontSize: '0.85rem',
+                    fontWeight: 700,
+                    color: 'var(--text-muted)',
+                    textDecoration: 'none',
                   }}
                 >
                   Details &rarr;
@@ -228,12 +309,6 @@ export default function Projects() {
             </div>
           ))}
         </div>
-
-        {projects.length === 0 && !loading && (
-          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
-            <p className="handwritten" style={{ fontSize: '1.25rem' }}>No projects found matching that filter.</p>
-          </div>
-        )}
       </div>
     </section>
   );

@@ -1,154 +1,178 @@
 import React from 'react';
 
 export default function Timeline() {
-  const events = [
+  const timelineItems = [
     {
-      period: '2024 - Present',
-      type: 'Experience',
-      title: 'Embedded Systems & PCB Design Intern',
-      institution: 'Dyoraa Robotics',
-      location: 'India',
-      description:
-        'Spearheaded the electrical schematic layout and PCB routing for autonomous mobile robots. Implemented high-current carrier boards, dual-channel motor driver stages, and 16-channel sensor arrays. Conducted hardware-in-the-loop simulation using ROS2 and Gazebo.',
-      tags: ['EasyEDA', 'PCB Fabrication', 'Firmware', 'ROS2', 'Robotics'],
+      title: 'B.Tech Computer Science and Engineering',
+      institution: 'JK Lakshmipat University, Jaipur',
+      desc: 'Currently in 4th semester.',
     },
     {
-      period: '2023 - 2027 (Expected)',
-      type: 'Education',
-      title: 'Bachelor of Technology (B.Tech) - Computer Science & Engineering',
-      institution: 'Engineering University',
-      location: 'Rajasthan, India',
-      description:
-        'Pursuing core Computer Science curriculum focusing on Data Structures & Algorithms, Database Management Systems, Computer Networks, and Full-Stack Web Technologies (MERN). Active member of the university robotics club.',
-      tags: ['Data Structures', 'DBMS', 'Web Architecture', 'Computer Networks'],
+      title: 'Robotics and Embedded Systems Development',
+      institution: 'Hands-on experience through personal projects and competitive robotics.',
+      desc: '',
     },
     {
-      period: '2022 - 2023',
-      type: 'Education',
-      title: 'Senior Secondary Education (Class XII - Science PCM)',
-      institution: 'Central School',
-      location: 'India',
-      description:
-        'Graduated with distinction in Physics, Chemistry, and Mathematics, fostering a strong foundation for software engineering and embedded circuit design.',
-      tags: ['Physics', 'Mathematics', 'Computer Science'],
+      title: 'Dyoraa Robotics',
+      institution: 'Building a robotics-focused venture for competitive and educational robotics.',
+      desc: '',
+    },
+    {
+      title: 'School Education',
+      institution: 'Shivalik Academy, Dehradun, Uttarakhand.',
+      desc: '',
     },
   ];
 
-  return (
-    <section id="timeline">
-      <div className="container">
-        <div className="section-title-wrap">
-          <span className="section-tag">// 04. JOURNEY //</span>
-          <h2 className="section-title">Education & Experience</h2>
-          <p className="section-subtitle">
-            Vertical chronological timeline illustrating academic background and hands-on industrial internships.
-          </p>
-        </div>
+  const curiosityItems = [
+    { text: 'Participation and wins in robotics competitions.', icon: '🏆' },
+    { text: 'Practical embedded systems development.', icon: '⚡' },
+    { text: 'PCB and circuit design.', icon: '📐' },
+    { text: 'Machine learning experimentation.', icon: '🤖' },
+    { text: 'Development of robotics products through Dyoraa Robotics.', icon: '⚙️' },
+  ];
 
-        {/* Vertical Timeline Container */}
+  return (
+    <section id="experience" style={{ padding: '5rem 0 5.5rem' }}>
+      <div className="container">
         <div
           style={{
-            position: 'relative',
-            maxWidth: '780px',
-            margin: '0 auto',
-            paddingLeft: '2.5rem',
+            display: 'grid',
+            gridTemplateColumns: '1.2fr 0.8fr',
+            gap: '3.5rem',
+            alignItems: 'start',
           }}
         >
-          {/* Vertical hand-drawn line */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '10px',
-              bottom: '10px',
-              left: '12px',
-              width: '3px',
-              backgroundColor: 'var(--border-color)',
-              borderStyle: 'solid',
-            }}
-          ></div>
+          {/* Left Column: Education & Experience Vertical Timeline */}
+          <div>
+            <div className="section-header">
+              <svg className="sketch-squiggle" viewBox="0 0 35 15">
+                <path d="M 2,12 Q 10,2 18,10 T 32,5" />
+              </svg>
+              <h2>Education & Experience.</h2>
+            </div>
 
-          {events.map((item, idx) => (
-            <div
-              key={idx}
-              style={{
-                position: 'relative',
-                marginBottom: '3rem',
-              }}
-            >
-              {/* Hand-drawn circular timeline node */}
+            <div style={{ position: 'relative', paddingLeft: '2.5rem', marginTop: '1.5rem' }}>
+              {/* Vertical dotted line */}
               <div
                 style={{
                   position: 'absolute',
-                  left: '-2.5rem',
-                  top: '6px',
-                  width: '26px',
-                  height: '26px',
-                  borderRadius: '50%',
-                  border: 'var(--border-width) solid var(--border-color)',
-                  backgroundColor: item.type === 'Experience' ? 'var(--highlight-bg)' : 'var(--bg-secondary)',
-                  color: item.type === 'Experience' ? 'var(--highlight-text)' : 'var(--text-primary)',
-                  boxShadow: '2px 2px 0px var(--border-color)',
-                  display: 'flex',
+                  top: '12px',
+                  bottom: '40px',
+                  left: '11px',
+                  width: '2px',
+                  backgroundColor: 'var(--border-color)',
+                }}
+              ></div>
+
+              {timelineItems.map((item, idx) => (
+                <div key={idx} style={{ position: 'relative', marginBottom: '2.5rem' }}>
+                  {/* Circular node */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: '-2.5rem',
+                      top: '4px',
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '50%',
+                      border: '2px solid var(--border-color)',
+                      backgroundColor: 'var(--bg-primary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--border-color)',
+                      }}
+                    ></div>
+                  </div>
+
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '0.25rem' }}>
+                    {item.title}
+                  </h3>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.5 }}>
+                    {item.institution}
+                  </div>
+                  {item.desc && (
+                    <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.2rem' }}>
+                      {item.desc}
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              {/* Hand-drawn "Keep building ~>" doodle */}
+              <div
+                className="handwritten"
+                style={{
+                  display: 'inline-flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '0.75rem',
-                  fontWeight: 800,
-                  zIndex: 2,
+                  gap: '0.4rem',
+                  fontSize: '1.2rem',
+                  fontWeight: 700,
+                  transform: 'rotate(-4deg)',
+                  color: 'var(--text-primary)',
+                  marginLeft: '0.5rem',
                 }}
               >
-                {item.type === 'Experience' ? '★' : '•'}
-              </div>
-
-              {/* Event Card */}
-              <div className="sketch-card">
-                <div
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'space-between',
-                    alignItems: 'baseline',
-                    marginBottom: '0.5rem',
-                    gap: '0.5rem',
-                  }}
-                >
-                  <span className="badge" style={{ backgroundColor: 'var(--bg-primary)' }}>
-                    {item.period}
-                  </span>
-                  <span className="handwritten" style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-muted)' }}>
-                    {item.type}
-                  </span>
-                </div>
-
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>
-                  {item.title}
-                </h3>
-
-                <div
-                  className="mono"
-                  style={{
-                    fontSize: '0.9rem',
-                    fontWeight: 700,
-                    color: 'var(--text-secondary)',
-                    marginBottom: '0.85rem',
-                  }}
-                >
-                  {item.institution} &bull; {item.location}
-                </div>
-
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1rem' }}>
-                  {item.description}
-                </p>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                  {item.tags.map((t) => (
-                    <span key={t} className="badge">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+                <span>Keep building</span>
+                <svg width="30" height="20" viewBox="0 0 35 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M 2,10 L 28,10" />
+                  <polyline points="20,4 28,10 20,16" />
+                </svg>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Right Column: Curiosity in motion */}
+          <div>
+            <div className="section-header">
+              <svg className="sketch-squiggle" viewBox="0 0 35 15">
+                <path d="M 2,12 Q 10,2 18,10 T 32,5" />
+              </svg>
+              <h2>Curiosity in motion.</h2>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '1.5rem' }}>
+              {curiosityItems.map((item, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '1rem',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '38px',
+                      height: '38px',
+                      borderRadius: '50%',
+                      border: '1.5px solid var(--border-color)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '1.1rem',
+                      flexShrink: 0,
+                      backgroundColor: 'var(--bg-secondary)',
+                      boxShadow: '2px 2px 0px var(--border-color)',
+                    }}
+                  >
+                    {item.icon}
+                  </div>
+                  <div style={{ fontSize: '0.96rem', fontWeight: 600, color: 'var(--text-secondary)', paddingTop: '6px' }}>
+                    {item.text}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

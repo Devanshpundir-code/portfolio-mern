@@ -2,248 +2,406 @@ import React, { useEffect, useState } from 'react';
 
 export default function Hero() {
   const roles = [
-    'MERN Stack Developer',
-    'React & Node.js Specialist',
-    'Hardware & PCB Designer',
-    'Robotics & Firmware Enthusiast',
+    'Robotics Developer',
+    'Embedded Systems Engineer',
+    'Hardware Prototyper',
+    'Full-Stack Developer',
   ];
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(110);
+  const [typingSpeed, setTypingSpeed] = useState(120);
 
   useEffect(() => {
     const currentWord = roles[currentRoleIndex];
 
-    const handleType = () => {
+    const timer = setTimeout(() => {
       if (!isDeleting) {
         setDisplayText(currentWord.substring(0, displayText.length + 1));
         if (displayText.length === currentWord.length) {
-          setTimeout(() => setIsDeleting(true), 1800);
-          setTypingSpeed(50);
+          setTimeout(() => setIsDeleting(true), 2000);
+          setTypingSpeed(60);
         }
       } else {
         setDisplayText(currentWord.substring(0, displayText.length - 1));
         if (displayText.length === 0) {
           setIsDeleting(false);
           setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-          setTypingSpeed(110);
+          setTypingSpeed(120);
         }
       }
-    };
+    }, typingSpeed);
 
-    const timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, currentRoleIndex, typingSpeed]);
 
   return (
-    <section id="hero" style={{ paddingTop: '5.5rem', paddingBottom: '6rem' }}>
+    <section id="hero" style={{ padding: '4rem 0 3.5rem', position: 'relative' }}>
       <div className="container">
         <div
+          className="hero-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
-            gap: '3rem',
+            gridTemplateColumns: '1.15fr 0.85fr',
+            gap: '2.5rem',
             alignItems: 'center',
           }}
         >
-          {/* Text Content */}
+          {/* Left Column: Hero Text */}
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '10px',
-                  height: '10px',
-                  borderRadius: '50%',
-                  backgroundColor: '#22c55e',
-                  boxShadow: '0 0 0 3px rgba(34, 197, 94, 0.25)',
-                }}
-              ></span>
-              <span className="mono" style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
-                READY FOR HIRE &bull; MERN & HARDWARE
-              </span>
-            </div>
-
-            <h1 style={{ fontSize: 'clamp(2.3rem, 5.5vw, 3.8rem)', fontWeight: 800, lineHeight: 1.15, marginBottom: '1rem' }}>
-              Hello, I'm <br />
-              <span
-                style={{
-                  position: 'relative',
-                  display: 'inline-block',
-                }}
-              >
-                Devansh Pundir
-                {/* Hand-drawn underline squiggle */}
-                <svg
-                  viewBox="0 0 300 20"
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    bottom: '-12px',
-                    width: '100%',
-                    height: '14px',
-                    stroke: 'var(--border-color)',
-                    fill: 'none',
-                    strokeWidth: 3,
-                    strokeLinecap: 'round',
-                  }}
-                >
-                  <path d="M 5,12 Q 75,2 150,12 T 295,12" />
-                </svg>
-              </span>
-            </h1>
-
-            {/* Typewriter Effect */}
+            {/* "Hello there!" sketch arrow */}
             <div
               style={{
-                fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
-                fontWeight: 700,
-                color: 'var(--text-secondary)',
-                minHeight: '2.4em',
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
-                marginBottom: '1.5rem',
-                fontFamily: 'var(--font-mono)',
+                gap: '0.4rem',
+                marginBottom: '0.5rem',
+                position: 'relative',
               }}
             >
-              <span>{displayText}</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <path d="M 5,16 Q 10,6 20,9" />
+                <polyline points="15 5 21 9 17 14" />
+              </svg>
+              <span className="handwritten" style={{ fontSize: '1.05rem', color: 'var(--text-secondary)' }}>
+                ~ Hello there! ~
+              </span>
+            </div>
+
+            <h1
+              style={{
+                fontSize: 'clamp(2.5rem, 5.5vw, 4.2rem)',
+                fontWeight: 900,
+                letterSpacing: '-1.5px',
+                lineHeight: 1.08,
+                marginBottom: '1.25rem',
+              }}
+            >
+              Hi, I'm <br />
+              <span>Devansh Pundir.</span>
+            </h1>
+
+            <div style={{ marginBottom: '1.25rem' }}>
+              <div style={{ fontSize: '1.28rem', fontWeight: 800, lineHeight: 1.35 }}>
+                Building intelligent machines.
+              </div>
+              <div style={{ fontSize: '1.28rem', fontWeight: 800, color: 'var(--text-secondary)', lineHeight: 1.35 }}>
+                Designing the hardware behind innovation.
+              </div>
+            </div>
+
+            <p
+              style={{
+                color: 'var(--text-secondary)',
+                fontSize: '1rem',
+                maxWidth: '560px',
+                lineHeight: 1.65,
+                marginBottom: '1.5rem',
+              }}
+            >
+              I'm a Computer Science Engineering student passionate about robotics, embedded systems, machine learning, and building practical hardware-software solutions.
+            </p>
+
+            {/* Typewriter Line */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                fontSize: '1.15rem',
+                fontWeight: 700,
+                fontFamily: 'var(--font-mono)',
+                marginBottom: '2rem',
+                minHeight: '2rem',
+              }}
+            >
+              <span style={{ color: 'var(--text-secondary)' }}>I am a</span>
+              <span style={{ borderBottom: '2px solid currentColor', paddingBottom: '2px' }}>
+                {displayText}
+              </span>
               <span
                 style={{
                   display: 'inline-block',
-                  width: '3px',
+                  width: '2px',
                   height: '1.2em',
-                  backgroundColor: 'var(--border-color)',
-                  marginLeft: '4px',
-                  animation: 'blink 0.9s infinite',
+                  backgroundColor: 'currentColor',
+                  animation: 'blink 0.8s infinite',
                 }}
               ></span>
             </div>
 
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '540px', marginBottom: '2.25rem' }}>
-              Bridging the digital and physical worlds: Architecting high-performance full-stack web applications with{' '}
-              <strong>MongoDB, Express, React, and Node.js</strong>, coupled with embedded robotics systems and custom PCB hardware.
-            </p>
+            {/* CTA Buttons */}
+            <div
+              className="hero-buttons"
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                gap: '1rem',
+                marginBottom: '2.5rem',
+              }}
+            >
+              <a href="#projects" className="btn btn-black">
+                Explore My Projects &rarr;
+              </a>
 
-            {/* Call to Actions (CTAs) */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
               <a
                 href="/api/resume/pdf"
-                className="btn btn-primary"
+                className="btn"
                 download="Devansh_Pundir_Resume.pdf"
-                title="Download verified resume in PDF format"
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                Download CV (PDF)
+                Download My Resume
               </a>
 
               <a
-                href="/api/resume/docx"
-                className="btn"
-                download="Devansh_Pundir_Resume.docx"
-                title="Download verified resume in Word (.docx) format"
+                href="#contact"
+                className="handwritten"
+                style={{
+                  fontSize: '1.15rem',
+                  fontWeight: 700,
+                  color: 'var(--text-primary)',
+                  textDecoration: 'none',
+                  borderBottom: '2px solid currentColor',
+                  paddingBottom: '2px',
+                  marginLeft: '0.25rem',
+                }}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                  <line x1="16" y1="17" x2="8" y2="17"></line>
-                </svg>
-                Download Word (.docx)
+                Let's Connect &rarr;
               </a>
+            </div>
 
-              <a href="#contact" className="btn" style={{ padding: '0.75rem 1.25rem' }}>
-                Contact Me &rarr;
-              </a>
+            {/* Bottom Status & Scroll Indicator */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2.5rem',
+                flexWrap: 'wrap',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span
+                  className="animate-pulse-dot"
+                  style={{
+                    display: 'inline-block',
+                    width: '9px',
+                    height: '9px',
+                    borderRadius: '50%',
+                    backgroundColor: '#10b981',
+                  }}
+                ></span>
+                <span className="mono" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                  Open to opportunities | Jaipur, India
+                </span>
+              </div>
+
+              {/* Scroll Mouse Doodle */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-muted)' }}>
+                <div
+                  style={{
+                    width: '18px',
+                    height: '26px',
+                    borderRadius: '10px',
+                    border: '2px solid currentColor',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    paddingTop: '4px',
+                  }}
+                >
+                  <div
+                    className="animate-scroll"
+                    style={{
+                      width: '3px',
+                      height: '6px',
+                      borderRadius: '2px',
+                      backgroundColor: 'currentColor',
+                    }}
+                  ></div>
+                </div>
+                <span className="handwritten" style={{ fontSize: '0.85rem' }}>Scroll</span>
+              </div>
             </div>
           </div>
 
-          {/* Hand-Drawn Sketch Illustration / Identity Box */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {/* Right Column: Sketch Artwork */}
+          <div className="hero-illustration" style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
             <div
-              className="sketch-card"
+              className="animate-float"
               style={{
-                width: '100%',
-                maxWidth: '420px',
-                textAlign: 'center',
                 position: 'relative',
-                transform: 'rotate(-1deg)',
+                width: '100%',
+                maxWidth: '430px',
               }}
             >
-              {/* Corner Tape Accent */}
+              {/* Floating Tag 1: Robotics */}
               <div
                 style={{
                   position: 'absolute',
-                  top: '-14px',
-                  left: '35%',
-                  width: '90px',
-                  height: '24px',
-                  backgroundColor: 'var(--badge-bg)',
-                  border: '1.5px solid var(--border-color)',
-                  transform: 'rotate(2deg)',
-                  boxShadow: '1px 1px 0px var(--border-color)',
-                }}
-              ></div>
-
-              {/* Hand-Drawn Illustrated Avatar */}
-              <div
-                style={{
-                  width: '180px',
-                  height: '180px',
-                  margin: '0.5rem auto 1.5rem',
-                  borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-                  border: 'var(--border-width) solid var(--border-color)',
-                  backgroundColor: 'var(--bg-tertiary)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '3px 3px 0px var(--border-color)',
-                  overflow: 'hidden',
+                  top: '15px',
+                  left: '10px',
+                  fontFamily: 'var(--font-sketch)',
+                  fontSize: '1.15rem',
+                  color: 'var(--text-secondary)',
+                  transform: 'rotate(-8deg)',
                 }}
               >
-                <svg width="140" height="140" viewBox="0 0 100 100" fill="none">
+                ~ Robotics
+              </div>
+
+              {/* Floating Tag 2: Embedded Systems */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '30px',
+                  fontFamily: 'var(--font-sketch)',
+                  fontSize: '1.05rem',
+                  color: 'var(--text-secondary)',
+                  transform: 'rotate(6deg)',
+                  textAlign: 'center',
+                }}
+              >
+                Embedded<br />Systems
+              </div>
+
+              {/* Floating Tag 3: AI & ML */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '75px',
+                  right: '-10px',
+                  fontFamily: 'var(--font-sketch)',
+                  fontSize: '1rem',
+                  color: 'var(--text-secondary)',
+                  transform: 'rotate(10deg)',
+                }}
+              >
+                AI & ML ~
+              </div>
+
+              {/* Speech bubble: Small ideas can build big things */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-35px',
+                  right: '5px',
+                  border: '2px solid var(--border-color)',
+                  borderRadius: '180px 15px 170px 15px/15px 170px 15px 180px',
+                  padding: '0.5rem 0.85rem',
+                  backgroundColor: 'var(--bg-primary)',
+                  boxShadow: '2px 2px 0px var(--border-color)',
+                  maxWidth: '135px',
+                  textAlign: 'center',
+                  fontFamily: 'var(--font-sketch)',
+                  fontSize: '0.82rem',
+                  lineHeight: 1.25,
+                }}
+              >
+                Small ideas can build big things.
+              </div>
+
+              {/* Main SVG Hand-Drawn Desk Sketch */}
+              <svg viewBox="0 0 460 380" fill="none" style={{ width: '100%', height: 'auto', display: 'block' }}>
+                {/* Lightbulb Idea Doodle */}
+                <g stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M 270,40 Q 280,30 290,40 Q 295,50 287,55 L 273,55 Q 265,50 270,40 Z" />
+                  <line x1="274" y1="58" x2="286" y2="58" />
+                  <line x1="276" y1="61" x2="284" y2="61" />
+                  {/* Rays */}
+                  <line x1="280" y1="20" x2="280" y2="26" />
+                  <line x1="265" y1="26" x2="270" y2="30" />
+                  <line x1="295" y1="26" x2="290" y2="30" />
+                </g>
+
+                {/* Robotic Arm */}
+                <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  {/* Base */}
+                  <path d="M 330,190 L 370,190 L 365,175 L 335,175 Z" />
+                  {/* Joint 1 */}
+                  <circle cx="350" cy="165" r="9" />
+                  {/* Arm segment 1 */}
+                  <line x1="346" y1="158" x2="315" y2="105" />
+                  <line x1="354" y1="162" x2="323" y2="109" />
+                  {/* Joint 2 */}
+                  <circle cx="319" cy="107" r="8" />
+                  {/* Arm segment 2 */}
+                  <line x1="319" y1="100" x2="290" y2="70" />
+                  {/* Gripper Wrist */}
+                  <circle cx="286" cy="67" r="5" />
+                  <path d="M 283,63 L 275,55" />
+                  <path d="M 288,62 L 285,50" />
+                </g>
+
+                {/* Character Working at Desk */}
+                <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   {/* Head */}
-                  <circle cx="50" cy="40" r="24" stroke="currentColor" strokeWidth="3" fill="var(--bg-secondary)" />
+                  <circle cx="240" cy="120" r="28" fill="var(--bg-primary)" />
                   {/* Hair */}
-                  <path d="M 28,34 Q 40,16 60,20 Q 72,24 74,36" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                  <path d="M 215,115 Q 225,92 250,96 Q 265,99 268,114" strokeWidth="4" />
                   {/* Glasses */}
-                  <circle cx="41" cy="38" r="7" stroke="currentColor" strokeWidth="2.5" />
-                  <circle cx="59" cy="38" r="7" stroke="currentColor" strokeWidth="2.5" />
-                  <line x1="48" y1="38" x2="52" y2="38" stroke="currentColor" strokeWidth="2.5" />
+                  <circle cx="230" cy="118" r="8" strokeWidth="2" />
+                  <circle cx="250" cy="118" r="8" strokeWidth="2" />
+                  <line x1="238" y1="118" x2="242" y2="118" strokeWidth="2" />
                   {/* Smile */}
-                  <path d="M 44,49 Q 50,54 56,49" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                  {/* Torso / Lab coat or Hoodie */}
-                  <path d="M 24,90 Q 28,68 50,68 Q 72,68 76,90" stroke="currentColor" strokeWidth="3" fill="var(--bg-secondary)" />
-                  <line x1="50" y1="68" x2="50" y2="90" stroke="currentColor" strokeWidth="2.5" strokeDasharray="3 3" />
-                </svg>
-              </div>
+                  <path d="M 235,133 Q 242,138 248,133" strokeWidth="2" />
+                  {/* Torso / Hoodie */}
+                  <path d="M 205,175 Q 215,150 240,150 Q 265,150 275,175" fill="var(--bg-primary)" />
+                  {/* Hoodie drawstrings */}
+                  <line x1="234" y1="156" x2="234" y2="170" strokeWidth="1.5" />
+                  <line x1="246" y1="156" x2="246" y2="170" strokeWidth="1.5" />
+                  {/* Arms typing on laptop */}
+                  <path d="M 205,175 Q 215,190 235,190" strokeWidth="3" />
+                  <path d="M 275,175 Q 265,190 250,190" strokeWidth="3" />
+                </g>
 
-              <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Devansh Pundir</h2>
-              <p className="handwritten" style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-                Full-Stack MERN & Embedded Engineer
-              </p>
+                {/* Laptop with </> display */}
+                <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  {/* Screen */}
+                  <polygon points="215,145 285,145 275,195 205,195" fill="var(--bg-primary)" />
+                  {/* Base */}
+                  <polygon points="195,195 285,195 300,205 180,205" fill="var(--bg-primary)" />
+                  {/* </> Code on screen */}
+                  <text x="245" y="175" textAnchor="middle" fontSize="18" fontWeight="800" fill="currentColor" fontFamily="monospace">
+                    &lt;/&gt;
+                  </text>
+                </g>
 
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '0.4rem',
-                  justifyContent: 'center',
-                  marginTop: '1rem',
-                }}
-              >
-                <span className="badge">#React.js</span>
-                <span className="badge">#Node.js</span>
-                <span className="badge">#Express</span>
-                <span className="badge">#MongoDB</span>
-                <span className="badge">#PCB_Design</span>
-                <span className="badge">#ROS2</span>
-              </div>
+                {/* Mobile Rover Robot with Wheels */}
+                <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  {/* Body chassis */}
+                  <rect x="180" y="240" width="55" height="25" rx="4" fill="var(--bg-primary)" />
+                  {/* Top sensor camera */}
+                  <rect x="195" y="225" width="25" height="15" rx="3" fill="var(--bg-primary)" />
+                  <circle cx="203" cy="232" r="3" />
+                  <circle cx="213" cy="232" r="3" />
+                  {/* Wheels */}
+                  <circle cx="185" cy="268" r="9" fill="var(--bg-primary)" />
+                  <circle cx="230" cy="268" r="9" fill="var(--bg-primary)" />
+                  {/* Antenna */}
+                  <line x1="215" y1="225" x2="225" y2="210" />
+                  <circle cx="226" cy="209" r="2" fill="currentColor" />
+                </g>
+
+                {/* PCB / Circuit Breadboard on desk */}
+                <g stroke="currentColor" strokeWidth="1.5">
+                  <rect x="255" y="240" width="80" height="40" rx="3" strokeDasharray="3 2" fill="var(--bg-primary)" />
+                  {/* Circuit traces */}
+                  <polyline points="265,250 280,250 285,260 300,260" />
+                  <polyline points="275,270 295,270 305,255 325,255" />
+                  <circle cx="265" cy="250" r="2" fill="currentColor" />
+                  <circle cx="300" cy="260" r="2" fill="currentColor" />
+                  <circle cx="325" cy="255" r="2" fill="currentColor" />
+                </g>
+
+                {/* Desk Line */}
+                <line x1="60" y1="285" x2="420" y2="285" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+              </svg>
             </div>
           </div>
         </div>

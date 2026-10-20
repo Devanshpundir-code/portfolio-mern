@@ -7,23 +7,24 @@ export default function Navbar() {
   const location = useLocation();
 
   const navLinks = [
+    { label: 'Home', href: '#hero' },
     { label: 'About', href: '#about' },
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Timeline', href: '#timeline' },
-    { label: 'Certificates', href: '#certifications' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Achievements', href: '#achievements' },
     { label: 'Contact', href: '#contact' },
   ];
 
-  const handleLinkClick = (e, href) => {
+  const handleScroll = (e, href) => {
     setMobileOpen(false);
     if (location.pathname !== '/') {
-      return; // Navigate to home
+      return;
     }
-    const target = document.querySelector(href);
-    if (target) {
+    const elem = document.querySelector(href);
+    if (elem) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
+      elem.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -35,8 +36,8 @@ export default function Navbar() {
         zIndex: 100,
         backgroundColor: 'var(--bg-primary)',
         borderBottom: 'var(--border-width) solid var(--border-color)',
-        backdropFilter: 'blur(8px)',
-        transition: 'background-color var(--transition-speed)',
+        backdropFilter: 'blur(10px)',
+        transition: 'background-color 0.25s',
       }}
     >
       <div
@@ -45,113 +46,91 @@ export default function Navbar() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: '75px',
+          height: '70px',
         }}
       >
-        {/* Brand Logo */}
+        {/* Brand Logo with hand-drawn pen stroke */}
         <Link
           to="/"
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.65rem',
+            gap: '0.4rem',
             textDecoration: 'none',
             color: 'var(--text-primary)',
           }}
         >
-          <div
+          <span
+            className="handwritten"
             style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-              border: 'var(--border-width) solid var(--border-color)',
-              backgroundColor: 'var(--highlight-bg)',
-              color: 'var(--highlight-text)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              fontSize: '1.65rem',
               fontWeight: 800,
-              fontSize: '1.15rem',
-              boxShadow: '2px 2px 0px var(--border-color)',
+              letterSpacing: '-0.5px',
             }}
           >
-            DP
-          </div>
-          <div>
-            <span style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.3px', display: 'block' }}>
-              Devansh Pundir
-            </span>
-            <span
-              className="handwritten"
-              style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', display: 'block', marginTop: '-3px' }}
-            >
-              MERN & Robotics
-            </span>
-          </div>
+            Devansh Pundir
+          </span>
+          {/* Pen stroke squiggle */}
+          <svg width="28" height="14" viewBox="0 0 30 15" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <path d="M 2,10 Q 15,2 28,8" />
+          </svg>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Center Navigation Links */}
         <nav
           style={{
             display: 'none',
-            gap: '1.25rem',
             alignItems: 'center',
+            gap: '1.4rem',
           }}
-          className="desktop-nav"
+          className="desktop-links"
         >
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
+              onClick={(e) => handleScroll(e, link.href)}
               style={{
                 textDecoration: 'none',
                 color: 'var(--text-primary)',
-                fontWeight: 700,
+                fontWeight: 600,
                 fontSize: '0.92rem',
-                padding: '0.35rem 0.6rem',
-                borderRadius: '8px',
-                transition: 'all 0.15s',
+                transition: 'opacity 0.2s',
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.6')}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        {/* Action Controls & Mobile Toggle */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        {/* Right Action Buttons */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
           <ThemeToggle />
 
-          {/* Quick PDF CV download */}
           <a
             href="/api/resume/pdf"
-            className="btn btn-primary btn-sm desktop-only"
+            className="btn btn-black btn-sm desktop-cv-btn"
             download="Devansh_Pundir_Resume.pdf"
-            title="Download verified PDF Resume from Express API"
+            style={{ padding: '0.5rem 1.1rem', gap: '0.45rem' }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            CV (PDF)
+            Download CV
           </a>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile hamburger toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="btn btn-sm mobile-menu-btn"
-            aria-label="Toggle navigation menu"
-            style={{ padding: '0.45rem 0.65rem' }}
+            className="btn btn-sm mobile-toggle"
+            aria-label="Toggle menu"
+            style={{ padding: '0.4rem 0.6rem' }}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               {mobileOpen ? (
                 <>
                   <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -173,8 +152,8 @@ export default function Navbar() {
       {mobileOpen && (
         <div
           style={{
-            borderTop: 'var(--border-width) solid var(--border-color)',
-            backgroundColor: 'var(--bg-secondary)',
+            backgroundColor: 'var(--bg-primary)',
+            borderTop: '1px solid var(--border-color)',
             padding: '1.5rem',
             display: 'flex',
             flexDirection: 'column',
@@ -185,23 +164,23 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
+              onClick={(e) => handleScroll(e, link.href)}
               style={{
                 textDecoration: 'none',
                 color: 'var(--text-primary)',
                 fontWeight: 700,
-                fontSize: '1.05rem',
-                padding: '0.5rem 0',
-                borderBottom: '1px dashed var(--border-color)',
+                fontSize: '1rem',
+                padding: '0.4rem 0',
+                borderBottom: '1px dashed rgba(0,0,0,0.15)',
               }}
             >
               {link.label}
             </a>
           ))}
-          <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
             <a
               href="/api/resume/pdf"
-              className="btn btn-primary btn-sm"
+              className="btn btn-black btn-sm"
               style={{ flex: 1 }}
               download="Devansh_Pundir_Resume.pdf"
             >
@@ -220,13 +199,13 @@ export default function Navbar() {
       )}
 
       <style>{`
-        @media (min-width: 860px) {
-          .desktop-nav { display: flex !important; }
-          .mobile-menu-btn { display: none !important; }
-          .desktop-only { display: inline-flex !important; }
+        @media (min-width: 900px) {
+          .desktop-links { display: flex !important; }
+          .desktop-cv-btn { display: inline-flex !important; }
+          .mobile-toggle { display: none !important; }
         }
-        @media (max-width: 859px) {
-          .desktop-only { display: none !important; }
+        @media (max-width: 899px) {
+          .desktop-cv-btn { display: none !important; }
         }
       `}</style>
     </header>
