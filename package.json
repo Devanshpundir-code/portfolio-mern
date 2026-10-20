@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Full-Stack MERN Portfolio Website with Black-and-White Hand-Drawn Visual Identity",
   "main": "server/server.js",
-  "type": "module",
   "scripts": {
     "start": "node server/server.js",
     "server": "node server/server.js",

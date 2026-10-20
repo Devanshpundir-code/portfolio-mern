@@ -1,16 +1,12 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import connectDB from './config/db.js';
-import contactRoutes from './routes/contactRoutes.js';
-import resumeRoutes from './routes/resumeRoutes.js';
-import projectRoutes from './routes/projectRoutes.js';
-import errorHandler from './middleware/errorHandler.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const path = require('path');
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+const contactRoutes = require('./routes/contactRoutes');
+const resumeRoutes = require('./routes/resumeRoutes');
+const projectRoutes = require('./routes/projectRoutes');
+const errorHandler = require('./middleware/errorHandler');
 
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '../.env') });
@@ -117,11 +113,10 @@ if (!process.env.VERCEL && process.env.NODE_ENV !== 'test') {
     })
     .catch((err) => {
       console.error('Initial database connection failed on startup:', err.message);
-      // Still listen so healthcheck and non-db routes are available
       app.listen(PORT, () => {
         console.log(`🚀 Portfolio Express Server running on port ${PORT} (fallback mode)`);
       });
     });
 }
 
-export default app;
+module.exports = app;

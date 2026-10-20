@@ -1,11 +1,7 @@
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-import PDFDocument from 'pdfkit';
-import { Document, Packer, Paragraph, TextRun, HeadingLevel } from 'docx';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const path = require('path');
+const fs = require('fs');
+const PDFDocument = require('pdfkit');
+const { Document, Packer, Paragraph, TextRun, HeadingLevel } = require('docx');
 
 const ASSETS_DIR = path.join(__dirname, '../assets');
 
@@ -194,7 +190,7 @@ generateDocxResume(docxPath).catch(err => console.error('DOCX generation error:'
 // @desc    Download PDF Resume
 // @route   GET /api/resume/pdf
 // @access  Public
-export const downloadPdfResume = async (req, res, next) => {
+const downloadPdfResume = async (req, res, next) => {
   try {
     if (!fs.existsSync(pdfPath)) {
       await generatePdfResume(pdfPath);
@@ -213,7 +209,7 @@ export const downloadPdfResume = async (req, res, next) => {
 // @desc    Download Word (.docx) Resume
 // @route   GET /api/resume/docx
 // @access  Public
-export const downloadDocxResume = async (req, res, next) => {
+const downloadDocxResume = async (req, res, next) => {
   try {
     if (!fs.existsSync(docxPath)) {
       await generateDocxResume(docxPath);
@@ -230,4 +226,9 @@ export const downloadDocxResume = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+module.exports = {
+  downloadPdfResume,
+  downloadDocxResume
 };

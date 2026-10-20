@@ -1,6 +1,5 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-// Cache connection state across serverless function invocations
 let isConnected = false;
 
 const connectDB = async () => {
@@ -19,5 +18,4 @@ const connectDB = async () => {
   }
 };
 
-export default connectDB;
-export { connectDB };
+module.exports = connectDB;

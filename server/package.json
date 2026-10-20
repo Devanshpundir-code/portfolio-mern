@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "Express.js REST API Backend for MERN Portfolio",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand --detectOpenHandles --forceExit"
+    "test": "jest --runInBand --detectOpenHandles --forceExit"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -25,7 +24,6 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testTimeout": 30000,
-    "transform": {}
+    "testTimeout": 30000
   }
 }

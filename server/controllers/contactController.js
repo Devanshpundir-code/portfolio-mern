@@ -1,7 +1,6 @@
-import Contact from '../models/Contact.js';
-import nodemailer from 'nodemailer';
+const Contact = require('../models/Contact');
+const nodemailer = require('nodemailer');
 
-// Optional email notification transporter
 const createTransporter = () => {
   if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
     return nodemailer.createTransport({
@@ -20,7 +19,7 @@ const createTransporter = () => {
 // @desc    Handle Contact Form Submission
 // @route   POST /api/contact
 // @access  Public
-export const submitContact = async (req, res, next) => {
+const submitContact = async (req, res, next) => {
   try {
     const { name, email, message } = req.body;
 
@@ -96,7 +95,7 @@ export const submitContact = async (req, res, next) => {
 // @desc    Retrieve all messages (for evaluator/admin verification)
 // @route   GET /api/contact/messages
 // @access  Public / Evaluator
-export const getAllMessages = async (req, res, next) => {
+const getAllMessages = async (req, res, next) => {
   try {
     const messages = await Contact.find().sort({ createdAt: -1 }).limit(100);
     return res.status(200).json({
@@ -107,4 +106,9 @@ export const getAllMessages = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+module.exports = {
+  submitContact,
+  getAllMessages
 };
