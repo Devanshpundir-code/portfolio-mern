@@ -308,8 +308,8 @@ export default function Hero() {
 
               {/* Main SVG Hand-Drawn Desk Sketch */}
               <svg viewBox="0 0 460 380" fill="none" style={{ width: '100%', height: 'auto', display: 'block' }}>
-                {/* Lightbulb Idea Doodle */}
-                <g stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                {/* Lightbulb Idea Doodle with Glow Animation */}
+                <g className="animate-bulb" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <path d="M 270,40 Q 280,30 290,40 Q 295,50 287,55 L 273,55 Q 265,50 270,40 Z" />
                   <line x1="274" y1="58" x2="286" y2="58" />
                   <line x1="276" y1="61" x2="284" y2="61" />
@@ -319,10 +319,17 @@ export default function Hero() {
                   <line x1="295" y1="26" x2="290" y2="30" />
                 </g>
 
-                {/* Robotic Arm */}
-                <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  {/* Base */}
-                  <path d="M 330,190 L 370,190 L 365,175 L 335,175 Z" />
+                {/* Robotic Arm with Oscillating Joint Animation */}
+                <g
+                  style={{
+                    animation: 'armOscillate 4.5s ease-in-out infinite',
+                    transformOrigin: '350px 165px',
+                  }}
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   {/* Joint 1 */}
                   <circle cx="350" cy="165" r="9" />
                   {/* Arm segment 1 */}
@@ -336,6 +343,11 @@ export default function Hero() {
                   <circle cx="286" cy="67" r="5" />
                   <path d="M 283,63 L 275,55" />
                   <path d="M 288,62 L 285,50" />
+                </g>
+
+                {/* Robotic Arm Static Base */}
+                <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M 330,190 L 370,190 L 365,175 L 335,175 Z" />
                 </g>
 
                 {/* Character Working at Desk */}
@@ -366,7 +378,7 @@ export default function Hero() {
                   <polygon points="215,145 285,145 275,195 205,195" fill="var(--bg-primary)" />
                   {/* Base */}
                   <polygon points="195,195 285,195 300,205 180,205" fill="var(--bg-primary)" />
-                  {/* </> Code on screen */}
+                  {/* </> Code on screen with subtle glow */}
                   <text x="245" y="175" textAnchor="middle" fontSize="18" fontWeight="800" fill="currentColor" fontFamily="monospace">
                     &lt;/&gt;
                   </text>
@@ -380,12 +392,20 @@ export default function Hero() {
                   <rect x="195" y="225" width="25" height="15" rx="3" fill="var(--bg-primary)" />
                   <circle cx="203" cy="232" r="3" />
                   <circle cx="213" cy="232" r="3" />
-                  {/* Wheels */}
-                  <circle cx="185" cy="268" r="9" fill="var(--bg-primary)" />
-                  <circle cx="230" cy="268" r="9" fill="var(--bg-primary)" />
-                  {/* Antenna */}
+                  {/* Animated Rotating Wheels */}
+                  <g style={{ animation: 'rotateWheel 8s linear infinite', transformOrigin: '185px 268px' }}>
+                    <circle cx="185" cy="268" r="9" fill="var(--bg-primary)" />
+                    <line x1="185" y1="259" x2="185" y2="277" strokeWidth="1.5" />
+                    <line x1="176" y1="268" x2="194" y2="268" strokeWidth="1.5" />
+                  </g>
+                  <g style={{ animation: 'rotateWheel 8s linear infinite', transformOrigin: '230px 268px' }}>
+                    <circle cx="230" cy="268" r="9" fill="var(--bg-primary)" />
+                    <line x1="230" y1="259" x2="230" y2="277" strokeWidth="1.5" />
+                    <line x1="221" y1="268" x2="239" y2="268" strokeWidth="1.5" />
+                  </g>
+                  {/* Blinking Antenna */}
                   <line x1="215" y1="225" x2="225" y2="210" />
-                  <circle cx="226" cy="209" r="2" fill="currentColor" />
+                  <circle className="animate-pulse-dot" cx="226" cy="209" r="3" fill="currentColor" />
                 </g>
 
                 {/* PCB / Circuit Breadboard on desk */}

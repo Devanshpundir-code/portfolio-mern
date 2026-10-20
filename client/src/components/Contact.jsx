@@ -285,12 +285,14 @@ export default function Contact() {
           {/* Right Column: Sketch Laptop & Formula */}
           <div style={{ textAlign: 'center', position: 'relative' }}>
             <svg viewBox="0 0 240 220" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', maxWidth: '240px', margin: '0 auto' }}>
-              {/* Lightbulb Idea */}
-              <circle cx="120" cy="35" r="14" />
-              <line x1="114" y1="49" x2="126" y2="49" />
-              <line x1="120" y1="12" x2="120" y2="18" />
-              <line x1="102" y1="20" x2="108" y2="24" />
-              <line x1="138" y1="20" x2="132" y2="24" />
+              {/* Lightbulb Idea with pulse */}
+              <g className="animate-bulb">
+                <circle cx="120" cy="35" r="14" />
+                <line x1="114" y1="49" x2="126" y2="49" />
+                <line x1="120" y1="12" x2="120" y2="18" />
+                <line x1="102" y1="20" x2="108" y2="24" />
+                <line x1="138" y1="20" x2="132" y2="24" />
+              </g>
 
               {/* Laptop with </> */}
               <polygon points="40,90 200,90 190,160 50,160" />
@@ -299,9 +301,14 @@ export default function Contact() {
                 &lt;/&gt;
               </text>
 
-              {/* Coffee mug */}
-              <rect x="25" y="145" width="16" height="20" rx="3" />
-              <path d="M 41,150 Q 48,155 41,160" />
+              {/* Coffee mug with rising steam */}
+              <g>
+                <rect x="25" y="145" width="16" height="20" rx="3" />
+                <path d="M 41,150 Q 48,155 41,160" />
+                {/* Steam squiggles */}
+                <path className="animate-steam" d="M 29,140 Q 32,132 29,125" stroke="#ffffff" strokeWidth="1.5" />
+                <path className="animate-steam" d="M 36,138 Q 39,130 36,122" stroke="#ffffff" strokeWidth="1.5" style={{ animationDelay: '0.8s' }} />
+              </g>
             </svg>
 
             {/* Ideas -> Products -> Impact */}

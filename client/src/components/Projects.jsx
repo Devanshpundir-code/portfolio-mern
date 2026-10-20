@@ -22,11 +22,13 @@ export default function Projects() {
           <line x1="20" y1="55" x2="140" y2="55" strokeDasharray="3 2" />
           {/* Gantry rails */}
           <line x1="15" y1="20" x2="145" y2="20" strokeWidth="2.5" />
-          <line x1="60" y1="15" x2="60" y2="85" strokeWidth="2" />
-          {/* Pen carriage */}
-          <rect x="52" y="35" width="16" height="20" fill="var(--bg-primary)" />
-          <line x1="60" y1="55" x2="60" y2="70" strokeWidth="2.5" />
-          <circle cx="60" cy="70" r="1.5" fill="currentColor" />
+          {/* Animated Pen Carriage on Hover */}
+          <g className="animate-hover-cnc">
+            <line x1="60" y1="15" x2="60" y2="85" strokeWidth="2" />
+            <rect x="52" y="35" width="16" height="20" fill="var(--bg-primary)" />
+            <line x1="60" y1="55" x2="60" y2="70" strokeWidth="2.5" />
+            <circle cx="60" cy="70" r="1.5" fill="currentColor" />
+          </g>
           {/* Stepper motor */}
           <rect x="125" y="10" width="18" height="15" rx="2" fill="var(--bg-primary)" />
         </svg>
@@ -48,9 +50,12 @@ export default function Projects() {
           {/* Person sketch at door */}
           <circle cx="115" cy="30" r="9" />
           <path d="M 103,60 Q 115,48 127,60 L 127,90 L 103,90 Z" />
-          {/* Scanner beam */}
-          <path d="M 40,25 L 110,28" strokeDasharray="2 2" />
-          <circle cx="40" cy="25" r="3" fill="currentColor" />
+          {/* Animated Scanner Beam on Hover */}
+          <g className="animate-hover-laser">
+            <line x1="38" y1="25" x2="88" y2="25" stroke="#ef4444" strokeWidth="2" strokeDasharray="3 2" />
+            <circle cx="38" cy="25" r="2.5" fill="#ef4444" stroke="none" />
+          </g>
+          <path d="M 40,25 L 110,28" strokeDasharray="2 2" opacity="0.6" />
         </svg>
       ),
     },
@@ -66,8 +71,8 @@ export default function Projects() {
         <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
           {/* Drawing Tablet / Notebook */}
           <rect x="30" y="15" width="55" height="70" rx="3" />
-          {/* Digit 7 display */}
-          <text x="58" y="60" fontSize="38" fontWeight="800" textAnchor="middle" fill="currentColor" fontFamily="monospace">
+          {/* Digit 7 display with pulse */}
+          <text className="animate-pulse-dot" x="58" y="60" fontSize="38" fontWeight="800" textAnchor="middle" fill="currentColor" fontFamily="monospace">
             7
           </text>
           {/* Output prediction screen */}
@@ -88,8 +93,8 @@ export default function Projects() {
       liveDemo: 'https://github.com/Devanshpundir-code/ML-projects.',
       illustration: (
         <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
-          {/* Hand-drawn fish sketch */}
-          <path d="M 25,50 Q 60,25 105,45 Q 120,40 135,30 L 128,50 L 135,70 Q 120,60 105,55 Q 60,75 25,50 Z" />
+          {/* Hand-drawn fish sketch body */}
+          <path d="M 25,50 Q 60,25 105,45 Q 120,40 128,50 Q 120,60 105,55 Q 60,75 25,50 Z" />
           {/* Fish Eye */}
           <circle cx="45" cy="48" r="3" fill="currentColor" />
           {/* Fin */}
@@ -98,6 +103,8 @@ export default function Projects() {
           <path d="M 60,40 Q 65,45 70,40" />
           <path d="M 75,40 Q 80,45 85,40" />
           <path d="M 67,48 Q 72,53 77,48" />
+          {/* Animated Tail Fin on Hover */}
+          <path className="animate-hover-tail" d="M 128,50 L 142,32 L 136,50 L 142,68 Z" fill="var(--bg-secondary)" />
         </svg>
       ),
     },
@@ -114,11 +121,13 @@ export default function Projects() {
           {/* Axes */}
           <line x1="25" y1="15" x2="25" y2="85" strokeWidth="2" />
           <line x1="25" y1="85" x2="135" y2="85" strokeWidth="2" />
-          {/* Bar charts */}
-          <rect x="38" y="55" width="14" height="30" fill="var(--bg-primary)" />
-          <rect x="60" y="35" width="14" height="50" fill="var(--bg-primary)" />
-          <rect x="82" y="45" width="14" height="40" fill="var(--bg-primary)" />
-          <rect x="104" y="25" width="14" height="60" fill="var(--bg-primary)" />
+          {/* Animated Bar charts on Hover */}
+          <g className="animate-hover-bars">
+            <rect x="38" y="55" width="14" height="30" fill="var(--bg-primary)" />
+            <rect x="60" y="35" width="14" height="50" fill="var(--bg-primary)" />
+            <rect x="82" y="45" width="14" height="40" fill="var(--bg-primary)" />
+            <rect x="104" y="25" width="14" height="60" fill="var(--bg-primary)" />
+          </g>
           {/* Trend line */}
           <polyline points="45,50 67,30 89,40 111,20" strokeDasharray="3 2" />
         </svg>
