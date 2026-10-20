@@ -109,19 +109,31 @@ export default function Navbar() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
           <ThemeToggle />
 
-          <a
-            href="/api/resume/pdf"
-            className="btn btn-black btn-sm desktop-cv-btn"
-            download="Devansh_Pundir_Resume.pdf"
-            style={{ padding: '0.5rem 1.1rem', gap: '0.45rem' }}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download CV
-          </a>
+          <div className="desktop-cv-btn" style={{ display: 'none', alignItems: 'center', gap: '0.4rem' }}>
+            <a
+              href="/api/resume/pdf"
+              className="btn btn-black btn-sm"
+              download="Devansh_Pundir_Resume.pdf"
+              title="Download verified resume in PDF format"
+              style={{ padding: '0.45rem 0.85rem', gap: '0.35rem', fontSize: '0.82rem' }}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              CV (PDF)
+            </a>
+            <a
+              href="/api/resume/docx"
+              className="btn btn-sm"
+              download="Devansh_Pundir_Resume.docx"
+              title="Download verified resume in Word (.docx) format"
+              style={{ padding: '0.45rem 0.85rem', gap: '0.35rem', fontSize: '0.82rem' }}
+            >
+              (.docx)
+            </a>
+          </div>
 
           {/* Mobile hamburger toggle */}
           <button

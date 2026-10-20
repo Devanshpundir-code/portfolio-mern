@@ -134,6 +134,22 @@ export default function About() {
               </div>
             </div>
 
+            {/* Current Status */}
+            <div style={{ display: 'flex', gap: '0.85rem' }}>
+              <div style={{ fontSize: '1.4rem', marginTop: '-2px' }}>⚡</div>
+              <div>
+                <div className="mono" style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.5px' }}>
+                  CURRENT STATUS
+                </div>
+                <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>
+                  Student (4th Semester, B.Tech CSE)
+                </div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                  Active Fresher &bull; Open to Robotics & SDE Internships
+                </div>
+              </div>
+            </div>
+
             {/* Focus */}
             <div style={{ display: 'flex', gap: '0.85rem' }}>
               <div style={{ fontSize: '1.4rem', marginTop: '-2px' }}>🎯</div>
