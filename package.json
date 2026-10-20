@@ -1,0 +1,30 @@
+{
+  "name": "mern-portfolio",
+  "version": "1.0.0",
+  "description": "Full-Stack MERN Portfolio Website with Black-and-White Hand-Drawn Visual Identity",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "node server/server.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm run install-all && npm run build --prefix client",
+    "install-all": "npm install && npm install --prefix server && npm install --prefix client",
+    "test": "npm test --prefix server"
+  },
+  "keywords": [
+    "mern",
+    "portfolio",
+    "react",
+    "node",
+    "express",
+    "mongodb",
+    "hand-drawn",
+    "sketch"
+  ],
+  "author": "Devansh Pundir",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
